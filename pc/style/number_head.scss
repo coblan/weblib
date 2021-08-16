@@ -1,0 +1,28 @@
+.number-head {
+    h1{font-size: 140%;font-weight: bolder;}
+    h2{font-size: 120%;font-weight: bold;}
+    h3{font-size: 100%;font-weight: bold;}
+    h1 {
+        counter-increment: counter_h1;
+        counter-reset: h2Counter;
+    }
+    h1::before {
+        content: counter(counter_h1)'. ';
+    }
+    /* insert number before h2 element */
+    h2 {
+        counter-increment: h2Counter;
+        counter-reset: h3Counter;
+    }
+    h2:before {
+        content: counter(counter_h1)'.'counter(h2Counter)' '
+    }
+    /* increase h2 counter and reset h3 counter when meet a h2 element */
+
+    h3:before {
+    content: counter(counter_h1)'.'counter(h2Counter) '.' counter(h3Counter) ' '
+    }
+    h3 {
+    counter-increment: h3Counter;
+    }
+}

@@ -1,0 +1,23 @@
+.p3{
+    display:flex;
+    width: 100vw;
+    overflow-x: hidden;
+    flex-direction:column;
+    .p3-body{
+        flex-grow:10;
+        .inn{
+            position: absolute;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+        }
+    }
+    .p3-foot{
+        
+        // height: 50px;
+        // .inn{
+        //     position: absolute;
+        // }
+    }
+}
