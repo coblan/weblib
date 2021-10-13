@@ -206,7 +206,9 @@ export var collection={
             }
         })
     },
-    
+    sample(array){
+        return array[Math.floor(Math.random() * array.length)]
+    },
   
     array:{
         clear(array){
