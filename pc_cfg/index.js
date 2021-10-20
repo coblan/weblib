@@ -1,7 +1,7 @@
 
 
 import {pop_layer} from './poplayer'
-import ex from 'weblib/ex'
+// import ex from 'weblib/ex'
 
 $(document).ready(function () { }).keydown(
     function (e) {
@@ -240,8 +240,8 @@ function assign(dst,src) {
 // import {notify} from  './config/notify'
 // assign(cfg,notify)
 
-window.cfg = cfg
+// window.cfg = cfg
 import cdn from 'weblib/cdn.js'
 // ex.load_js(cdn.jquery)
-ex.load_js(cdn.js)
+// ex.load_js(cdn.js)
 export default cfg
