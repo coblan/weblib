@@ -4,5 +4,7 @@ export default {
     animate_css:'https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css',
     stomp_js:'https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js',
     layer:'https://cdn.jsdelivr.net/npm/layerui@3.1.1/src/layer.min.js',
-    jquery:'https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js'
+    jquery:'https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js',
+    swiper_js:'https://cdn.jsdelivr.net/npm/swiper@4.5.0/dist/js/swiper.min.js',
+    swiper_css:'https://cdn.jsdelivr.net/npm/swiper@4.5.0/dist/css/swiper.min.css',
 }
