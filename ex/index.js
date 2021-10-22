@@ -28,5 +28,5 @@ ex.os = os
 ex.vld = get_validator()
 ex.FreePromise=FreePromise
 
-window.ex = ex
+// window.ex = ex
 export default ex
