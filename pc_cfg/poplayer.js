@@ -28,7 +28,7 @@ export  function pop_layer (com_ctx,component_name,callback,layerConfig){
     var layer_config = {
         type: 1,
         area: psize,// ['800px', '500px'],
-        title: com_ctx.title || '详细',
+        title: com_ctx.title,
         zIndex:1000,
         resize:true,
         resizing: function(layero){
@@ -64,7 +64,8 @@ export  function pop_layer (com_ctx,component_name,callback,layerConfig){
         }
     }
     if(layerConfig){
-        ex.assign(layer_config,layerConfig)
+        Object.assign(layer_config,layerConfig)
+        // ex.assign(layer_config,layerConfig)
     }
     var opened_layer_index = layer.open(layer_config);
     cfg.layer_index_stack.push(opened_layer_index);
