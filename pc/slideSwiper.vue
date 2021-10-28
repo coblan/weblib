@@ -22,13 +22,16 @@
 <!--                            :click-express='item.click_express'-->
 <!--                            ></imageCtn>-->
                     </slot>
+<!--              swiper滚动到最右侧，最后一个显示不出来，所以加一个占位的-->
+<!--              在这里放，可能引起 第一个元素 异常！！！  现在最好放到slot里面去-->
+<!--              <div class="swiper-slide"></div>-->
             </div>
 
             <!-- Add Pagination -->
             <div v-if="showPagination" class="swiper-pagination swiper-pagination-white"></div>
             <!-- Add Arrows -->
-          <!--                <div class="swiper-button-next swiper-button-white"></div>-->
-          <!--                <div class="swiper-button-prev swiper-button-white"></div>-->
+<!--                          <div class="swiper-button-next swiper-button-white"></div>-->
+<!--                          <div class="swiper-button-prev swiper-button-white"></div>-->
 
 <!--            <template v-if='showArrow'>-->
 <!--              <div class="swiper-button-prev">-->
@@ -40,22 +43,14 @@
 <!--            </template>-->
             
         </div>
-      <div class="swiper-container2" v-if='showArrow && loaded'>
-          <div class="swiper-button-prev">
+      <div class="swiper-container2" v-show='showArrow && loaded'>
+          <div class="swiper-button-prev" :style="mystyle">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 44"><path d="M0,22L22,0l2.1,2.1L4.2,22l19.9,19.9L22,44L0,22L0,22L0,22z" /></svg>
           </div>
-          <div class="swiper-button-next">
+          <div class="swiper-button-next" :style="mystyle">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 44"><path d="M27,22L27,22L5,44l-2.1-2.1L22.8,22L2.9,2.1L5,0L27,22L27,22z" /></svg>
           </div>
       </div>
-<!--      <template v-if='showArrow'>-->
-<!--        <div class="swiper-button-prev">-->
-<!--          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 44"><path d="M0,22L22,0l2.1,2.1L4.2,22l19.9,19.9L22,44L0,22L0,22L0,22z" /></svg>-->
-<!--        </div>-->
-<!--        <div class="swiper-button-next">-->
-<!--          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 44"><path d="M27,22L27,22L5,44l-2.1-2.1L22.8,22L2.9,2.1L5,0L27,22L27,22z" /></svg>-->
-<!--        </div>-->
-<!--      </template>-->
 
     </div>
 </template>
@@ -76,6 +71,12 @@ export default {
         },
         slidesPerView:{
             default:3,
+        },
+        spaceBetween:{
+            default:30, // 这个属性好像在free模式下没用，全部由slidesPerView 进行控制了
+        },
+        arrowScale:{
+           default:0.6
         }
 
     },
@@ -94,6 +95,15 @@ export default {
         // })
     },
     computed:{
+      mystyle(){
+        if(this.arrowScale){
+          return {
+            transform:`scale(${this.arrowScale})`
+          }
+        }else{
+          return  {}
+        }
+      }
     },
     methods:{
         async update(){
@@ -101,9 +111,9 @@ export default {
             await ex.load_js(cdn.swiper_js)
             var self =this
             var swiper = new Swiper(this.$el.querySelector('.swiper-container'), {
-                slidesPerView: this.slidesPerView ,
+                slidesPerView:  this.slidesPerView || 'auto' ,
                 freeMode: true,
-                spaceBetween: 30,
+                spaceBetween: this.spaceBetween,
                 // effect: 'fade',
                 // loop: true,
                 // autoplay: {
@@ -172,10 +182,10 @@ export default {
 //  -webkit-align-items: center;
 //  align-items: center;
 //}
-//.swiper-slide{
-//  height: 200px;
-//  width: 50px;
-//}
+.swiper-slide{
+  //height: 200px;
+  //width: 50px;
+}
 //.swiper-slide img {
 //  display: block;
 //  width: 100%;

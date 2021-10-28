@@ -70,7 +70,11 @@ var cfg={
     //    'picture_size_excceed':'图片大小不能超过{maxsize}'
     //},
     tr(wd){
-        return js_config.tr[wd] || wd
+       /*用户翻译
+       该函数原来的js_config是由python后台注入，这里未实现。[TODO]
+        */
+        // return js_config.tr[wd] || wd
+        return wd
     },
 
     show_cloak:function(){

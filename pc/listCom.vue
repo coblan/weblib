@@ -32,14 +32,18 @@ export default {
         }
     },
     mounted(){
-        this.innGetData()
+        this.updateData()
     },
     methods:{
         pageChange(page){
             this.current_page = page
-            this.innGetData()
+            this.updateData()
         },
-        async innGetData(){
+        async search(){
+            this.current_page =1
+            return await this.updateData()
+        },
+        async updateData(){
             var resp = await this.getData({pageSize:this.pageSize,currentPage: this.current_page,})
             this.rows= resp.rows
             this.current_page= resp.current_page
