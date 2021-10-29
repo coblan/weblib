@@ -3,6 +3,7 @@
         class='no-title'
         :visible.sync="centerDialogVisible"
         :width='ctx.width'
+        :close-on-click-modal="false"
         center>
         <template v-slot:title>
             <!-- <div style="display:flex">
@@ -12,7 +13,7 @@
             </div> -->
             
         </template>
-        <component :is='ctx.editor' :ctx='ctx.inn_ctx'></component> 
+        <component :is='ctx.editor' :ctx='ctx.inn_ctx' @finish="onFinish"></component>
         </el-dialog>
 </template>
 <script>

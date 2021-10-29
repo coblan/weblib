@@ -1,5 +1,4 @@
 
-
 export function get_validator(){
     var validator =  {
         validate(dc,validate_dc){
@@ -17,21 +16,22 @@ export function get_validator(){
                         let error_msg = vldtor(dc[k])
                         if(error_msg){
                             has_error=true
-                            this.notify(error_msg)
+                            resolve(error_msg)
+                            // this.notify(error_msg)
                             // reject(error_msg)
                             break
                         }
                     }
                 }
                 if(!has_error){
-                    resolve(true)
+                    resolve()
                 }
             })
             
         },
-        notify(error){
-            cfg.toast(error)
-        },
+        // notify(error){
+        //     cfg.toast(error)
+        // },
 
         notNull(msg){
             return function(value){
@@ -58,6 +58,13 @@ export function get_validator(){
         list_not_empty(msg){
             return function(value){
                 if(value.length ==0){
+                    return msg
+                }
+            }
+        },
+        isTrue(msg){
+            return function(value){
+                if(!value){
                     return msg
                 }
             }
