@@ -6,6 +6,7 @@
         <el-pagination
             layout="prev, pager, next"
             :page-size='pageSize'
+            :current-page="current_page"
             @current-change='pageChange'
             :total="total">
         </el-pagination>
@@ -32,7 +33,7 @@ export default {
         }
     },
     mounted(){
-        this.updateData()
+        // this.updateData()
     },
     methods:{
         pageChange(page){
@@ -44,10 +45,12 @@ export default {
             return await this.updateData()
         },
         async updateData(){
-            var resp = await this.getData({pageSize:this.pageSize,currentPage: this.current_page,})
+            var resp = await this.getData({pageSize:this.pageSize,pageIndex: this.current_page,})
             this.rows= resp.rows
-            this.current_page= resp.current_page
             this.total=resp.total
+            if(resp.pageIndex){
+              this.current_page= resp.pageIndex
+            }
 
         }
     }

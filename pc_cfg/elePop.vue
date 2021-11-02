@@ -20,24 +20,36 @@
 import Vue from 'vue';
 import { Dialog } from 'element-ui';
 
-Vue.component(Dialog.name, Dialog);
+// Vue.component(Dialog.name, Dialog);
 
 var  elePop = {
     props:{
         ctx:{}
     },
+    components:{
+      elDialog:Dialog
+    },
     data(){
         return {
-            centerDialogVisible:true
+            centerDialogVisible:true,
+            hasfinish:false,
         }
     },
     watch:{
         centerDialogVisible(nv){
-            if(!nv){
+            if(!nv && !this.hasfinish){
                 this.$emit('finish',)
             }
         }
+    },
+  methods:{
+    onFinish(ee){
+      // 必须prevent  finish事件会冒泡到 append_vue_dom函数中
+      this.hasfinish=true
+      this.centerDialogVisible = false
+        this.$emit('finish',ee)
     }
+  }
 }
 
 import  {append_vue_dom} from 'weblib/pc_cfg/appendVueDom'
