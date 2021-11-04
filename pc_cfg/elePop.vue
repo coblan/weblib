@@ -1,4 +1,5 @@
 <template>
+<!-- no-border -->
       <el-dialog
         class='no-title'
         :visible.sync="centerDialogVisible"
@@ -24,6 +25,11 @@ import { Dialog } from 'element-ui';
 
 var  elePop = {
     props:{
+        /**
+         * width:弹出窗口的宽度
+         * no-border:无边框
+         * borderRadius:5px  圆角
+         */
         ctx:{}
     },
     components:{
@@ -42,6 +48,18 @@ var  elePop = {
             }
         }
     },
+    computed:{
+        // mystyle(){
+        //     debugger
+        //     if(this.ctx.borderRadius){
+        //         return {
+        //             borderRadius:this.ctx.borderRadius
+        //         }
+        //     }else{
+        //         return {}
+        //     }
+        // }
+    },
   methods:{
     onFinish(ee){
       // 必须prevent  finish事件会冒泡到 append_vue_dom函数中
@@ -58,6 +76,7 @@ export function pop_vue_com_ele(editor,ctx){
     var pop_ctx = {
         editor:editor,
         width:ctx.width,
+        // borderRadius:ctx.borderRadius,
         inn_ctx:ctx
     }
     return append_vue_dom(elePop,pop_ctx)
@@ -75,5 +94,15 @@ export default elePop
 .no-title ::v-deep .el-dialog__body{
     padding: 0;
 }
+.no-title ::v-deep .el-dialog{
+    background: none;
+}
+.no-border ::v-deep .el-dialog{
+    border: none;
+    box-shadow: none;
+    background: none;
+}
+
+
 
 </style>
