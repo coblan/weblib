@@ -68,6 +68,13 @@ export function get_validator(){
                     return msg
                 }
             }
+        },
+        equal(msg,word){
+            return function(value){
+                if(value !=word){
+                    return msg
+                }
+            }
         }
     }
 

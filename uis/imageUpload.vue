@@ -13,7 +13,8 @@ export default {
         fileInput
     },
     props:{
-        uploadUrl:{}
+        uploadUrl:{},
+        
     },
     data(){
         return {
@@ -27,9 +28,9 @@ export default {
         selectFile(){
             this.$refs.loader.select()
         },
-        upload(){
-            ex.uploadfile(this.myimages,)
-        }
+        // upload(){
+        //     ex.uploadfile(this.myimages,)
+        // }
 
     }
 }
