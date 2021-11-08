@@ -206,7 +206,7 @@ var cfg={
                         }
             }, function(index){
                 layer.close(index);
-                resolve()
+                resolve(true)
             },function(index){
                     layer.close(index);
                     reject()

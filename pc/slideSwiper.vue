@@ -149,6 +149,7 @@ export default {
 <style scoped lang='scss'>
 .slide-swiper{
   position: relative;
+
 }
 .swiper-container2{
   position: absolute;

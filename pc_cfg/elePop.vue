@@ -5,6 +5,7 @@
         :visible.sync="centerDialogVisible"
         :width='ctx.width'
         :close-on-click-modal="false"
+        :show-close="ctx.showClose==undefined?true:ctx.showClose"
         center>
         <template v-slot:title>
             <!-- <div style="display:flex">
@@ -76,6 +77,7 @@ export function pop_vue_com_ele(editor,ctx){
     var pop_ctx = {
         editor:editor,
         width:ctx.width,
+        showClose:ctx.showClose,
         // borderRadius:ctx.borderRadius,
         inn_ctx:ctx
     }
