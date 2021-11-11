@@ -4,6 +4,7 @@
 
         </slot>
         <el-pagination
+            v-if="paginate"
             layout="prev, pager, next"
             :page-size='pageSize'
             :current-page="current_page"
@@ -23,7 +24,10 @@ export default {
         pageSize:{
             default:20
         },
-        getData:{}
+        getData:{},
+        paginate:{
+          default: ()=>true
+      }
     },
     data(){
         return {
