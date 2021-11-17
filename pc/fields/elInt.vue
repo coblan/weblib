@@ -1,6 +1,8 @@
 <template>
   <el-input 
             :placeholder="placeholder"
+            :size="size"
+            :style="mystyle"
             @keypress.native="isNumber($event)"
             v-model="inn_value" >
 
@@ -14,6 +16,8 @@ export  default {
   props:{
     value:{},
     placeholder:{},
+    size:{},
+    width:{},
     type:{
       default:()=>'text'
     }
@@ -21,6 +25,17 @@ export  default {
   data(){
     return {
       inn_value:this.value
+    }
+  },
+  computed:{
+    mystyle(){
+      if(this.width){
+        return {
+          width:this.width
+        }
+      }
+
+
     }
   },
   watch:{
@@ -77,6 +92,7 @@ export  default {
 .vip{
     ::v-deep{
         .el-input__inner:focus{border-color:#e5c878}
+
     }
 }
 
