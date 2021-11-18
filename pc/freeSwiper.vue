@@ -1,18 +1,17 @@
 <template>
-    <div class="free-swiper" >
+    <div class="free-swiper" :style="us_style">
         <div class="swiper swiper-container">
             <div class="swiper-wrapper">
                     <slot name='content'>
-
-                        <div class="swiper-slide">Slide 1</div>
-                        <div class="swiper-slide">Slide 2</div>
-                        <div class="swiper-slide">Slide 3</div>
-                        <div class="swiper-slide">Slide 4</div>
-                        <div class="swiper-slide">Slide 5</div>
-                        <div class="swiper-slide">Slide 6</div>
-                        <div class="swiper-slide">Slide 7</div>
-                        <div class="swiper-slide">Slide 8</div>
-                        <div class="swiper-slide">Slide 9</div>
+<!--                        <div class="swiper-slide">Slide 1</div>-->
+<!--                        <div class="swiper-slide">Slide 2</div>-->
+<!--                        <div class="swiper-slide">Slide 3</div>-->
+<!--                        <div class="swiper-slide">Slide 4</div>-->
+<!--                        <div class="swiper-slide">Slide 5</div>-->
+<!--                        <div class="swiper-slide">Slide 6</div>-->
+<!--                        <div class="swiper-slide">Slide 7</div>-->
+<!--                        <div class="swiper-slide">Slide 8</div>-->
+<!--                        <div class="swiper-slide">Slide 9</div>-->
 
                     </slot>
             </div>
@@ -20,17 +19,17 @@
             <!-- Add Pagination -->
             <div v-if="showPagination" class="swiper-pagination swiper-pagination-white"></div>
             <!-- Add Arrows -->
-                         <div class="swiper-button-next swiper-button-white"></div>
-                         <div class="swiper-button-prev swiper-button-white"></div>
+<!--                         <div class="swiper-button-next swiper-button-white"></div>-->
+<!--                         <div class="swiper-button-prev swiper-button-white"></div>-->
 
-<!--            <template v-if='showArrow'>-->
-<!--              <div class="swiper-button-prev">-->
-<!--                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 44"><path d="M0,22L22,0l2.1,2.1L4.2,22l19.9,19.9L22,44L0,22L0,22L0,22z" /></svg>-->
-<!--              </div>-->
-<!--              <div class="swiper-button-next">-->
-<!--                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 44"><path d="M27,22L27,22L5,44l-2.1-2.1L22.8,22L2.9,2.1L5,0L27,22L27,22z" /></svg>-->
-<!--              </div>-->
-<!--            </template>-->
+            <template v-if='showArrow'>
+              <div class="swiper-button-prev" >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 44"><path d="M0,22L22,0l2.1,2.1L4.2,22l19.9,19.9L22,44L0,22L0,22L0,22z" /></svg>
+              </div>
+              <div class="swiper-button-next" >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 44"><path d="M27,22L27,22L5,44l-2.1-2.1L22.8,22L2.9,2.1L5,0L27,22L27,22z" /></svg>
+              </div>
+            </template>
             
         </div>
     </div>
@@ -58,6 +57,9 @@ export default {
         },
         arrowScale:{
            default:0.6
+        },
+        arrowColor:{
+          default:'grey'
         }
 
     },
@@ -76,6 +78,12 @@ export default {
         // })
     },
     computed:{
+      us_style(){
+        return {
+          '--arrow_color':this.arrowColor,
+          '--arrow-scale':`scale(${this.arrowScale})`,
+        }
+      },
       mystyle(){
         if(this.arrowScale){
           return {
@@ -128,16 +136,15 @@ export default {
 }
 </script>
 <style scoped lang='scss'>
+.free-swiper{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 .slide-swiper{
   position: relative;
 }
-.swiper-container2{
-  position: absolute;
-  top:0;
-  left: -50px;
-  right: -50px;
-  bottom: 0;
-}
+
 .swiper {
   width: 100%;
   height: 100%;
@@ -184,8 +191,8 @@ export default {
 .swiper-button-prev,
 .swiper-container-rtl .swiper-button-prev,
 .swiper-container-rtl .swiper-button-next{
-  fill: grey;
-  transform: scale(0.6);
+  fill: var(--arrow_color) ; // grey;
+  transform: var(--arrow-scale); //  scale(0.6);
   //position: relative;
 }
 .swiper-button-next{
