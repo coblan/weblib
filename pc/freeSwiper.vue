@@ -1,37 +1,27 @@
 <template>
-    <div class="slide-swiper" >
+    <div class="free-swiper" >
         <div class="swiper swiper-container">
             <div class="swiper-wrapper">
                     <slot name='content'>
 
-<!--                      <div class="swiper-slide">Slide 1</div>-->
-<!--                      <div class="swiper-slide">Slide 2</div>-->
-<!--                      <div class="swiper-slide">Slide 3</div>-->
-<!--                      <div class="swiper-slide">Slide 4</div>-->
-<!--                      <div class="swiper-slide">Slide 5</div>-->
-<!--                      <div class="swiper-slide">Slide 6</div>-->
-<!--                      <div class="swiper-slide">Slide 7</div>-->
-<!--                      <div class="swiper-slide">Slide 8</div>-->
-<!--                      <div class="swiper-slide">Slide 9</div>-->
+                        <div class="swiper-slide">Slide 1</div>
+                        <div class="swiper-slide">Slide 2</div>
+                        <div class="swiper-slide">Slide 3</div>
+                        <div class="swiper-slide">Slide 4</div>
+                        <div class="swiper-slide">Slide 5</div>
+                        <div class="swiper-slide">Slide 6</div>
+                        <div class="swiper-slide">Slide 7</div>
+                        <div class="swiper-slide">Slide 8</div>
+                        <div class="swiper-slide">Slide 9</div>
 
-<!--                        <imageCtn class="swiper-slide" -->
-<!--                            v-for="item in items" -->
-<!--                            :key='item.name' -->
-<!--                            :imageUrl='item.image_url'-->
-<!--                            :label='item.label'-->
-<!--                            :click-express='item.click_express'-->
-<!--                            ></imageCtn>-->
                     </slot>
-<!--              swiper滚动到最右侧，最后一个显示不出来，所以加一个占位的-->
-<!--              在这里放，可能引起 第一个元素 异常！！！  现在最好放到slot里面去-->
-<!--              <div class="swiper-slide"></div>-->
             </div>
 
             <!-- Add Pagination -->
             <div v-if="showPagination" class="swiper-pagination swiper-pagination-white"></div>
             <!-- Add Arrows -->
-<!--                          <div class="swiper-button-next swiper-button-white"></div>-->
-<!--                          <div class="swiper-button-prev swiper-button-white"></div>-->
+                         <div class="swiper-button-next swiper-button-white"></div>
+                         <div class="swiper-button-prev swiper-button-white"></div>
 
 <!--            <template v-if='showArrow'>-->
 <!--              <div class="swiper-button-prev">-->
@@ -43,15 +33,6 @@
 <!--            </template>-->
             
         </div>
-      <div class="swiper-container2" v-show='showArrow && loaded'>
-          <div class="swiper-button-prev" :style="mystyle">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 44"><path d="M0,22L22,0l2.1,2.1L4.2,22l19.9,19.9L22,44L0,22L0,22L0,22z" /></svg>
-          </div>
-          <div class="swiper-button-next" :style="mystyle">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 44"><path d="M27,22L27,22L5,44l-2.1-2.1L22.8,22L2.9,2.1L5,0L27,22L27,22z" /></svg>
-          </div>
-      </div>
-
     </div>
 </template>
 <script>
