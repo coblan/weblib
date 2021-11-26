@@ -56,13 +56,16 @@ import cdn from '../cdn.js'
 export default {
     props:{
         showPagination:{
-          default: false,
+          default: true,
         },
         showArrow:{
             default:true
         },
         slidesPerView:{
             default:1,
+        },
+        delay:{
+            default:3000,
         }
 
     },
@@ -91,11 +94,11 @@ export default {
                 // freeMode: true,
                 spaceBetween: 30,
                 // effect: 'fade',
-                // loop: true,
-                // autoplay: {
-                //     delay: this.delay ,
-                //     disableOnInteraction: false,
-                // },
+                loop: true,
+                autoplay: {
+                    delay: this.delay ,
+                    disableOnInteraction: false,
+                },
 
                 pagination: {
                     el: this.$el.querySelector('.swiper-pagination'),
