@@ -211,6 +211,22 @@ export var old={
             last_list.push(item)
         })
         return out_list
+    },
+    copyToClip (content) {
+        var aux = document.createElement("input");
+        aux.setAttribute("value", content);
+        document.body.appendChild(aux);
+        aux.select();
+        document.execCommand("copy");
+        document.body.removeChild(aux);
+        return new Promise((resovle,reject)=>{
+            resovle()
+        })
+        //if (message == null) {
+        //    alert("复制成功");
+        //} else{
+        //    alert(message);
+        //}
     }
 
 

@@ -1,5 +1,7 @@
 <template>
-    <div class="image-div" :style="myStyle"></div>
+    <div class="image-div" :class="[type]" :style="myStyle">
+      <slot></slot>
+    </div>
 </template>
 <script>
 /* 图片作为 background ，可以按div的大小显示图片
@@ -7,12 +9,13 @@
 */
 export default {
     props:{
-        src:{}
+        src:{},
+        type:{}
     },
     computed:{
         myStyle(){
             return {
-                'background-image':'url('+this.src+')'
+                'background-image': `url(${this.src})`  //'url('+this.src+')'
             }
         }
     }
@@ -27,7 +30,9 @@ export default {
 .image-div{
     background-size: cover;
     background-position:center;
-
+    background-repeat: no-repeat;
 }
-    
+.stretch.image-div{
+  background-size: 100% 100%;
+}
 </style>
