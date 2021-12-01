@@ -1,5 +1,5 @@
 export  var os = function() {
-    if (process.client) {
+    // if (process.client) {
         var ua = navigator.userAgent,
         isWindowsPhone = /(?:Windows Phone)/.test(ua),
         isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
@@ -15,6 +15,6 @@ export  var os = function() {
             isAndroid : isAndroid,
             isPc : isPc
         };
-    }
+    // }
 
 }();

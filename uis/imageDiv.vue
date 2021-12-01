@@ -10,15 +10,48 @@
 export default {
     props:{
         src:{},
-        type:{}
+        type:{},
+        defaultSrc:{}
     },
-    computed:{
+    data(){
+      return {
+        loaded:false
+      }
+    },
+
+  computed:{
+      realsrc(){
+        if(this.loaded || !this.defaultSrc){
+          return this.src
+        }else{
+          return  this.defaultSrc
+        }
+      },
         myStyle(){
             return {
-                'background-image': `url(${this.src})`  //'url('+this.src+')'
+                'background-image': `url(${this.realsrc})`  //'url('+this.src+')'
             }
         }
-    }
+    },
+  mounted() {
+      this.updateSrc()
+  },
+  watch:{
+      src(nv){
+
+       this.updateSrc()
+      }
+  },
+  methods:{
+      updateSrc(){
+        this.loaded=false
+        if(this.defaultSrc){
+          ex.load_image(this.src).then(()=>{
+            this.loaded=true
+          })
+        }
+      }
+  }
 }
 
 /* .image-div{

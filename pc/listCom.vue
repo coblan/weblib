@@ -1,8 +1,11 @@
 <template>
     <div class="list-com">
-        <slot v-bind:rows="rows">
-
+        <slot v-bind:rows="rows" v-bind:loaded="loaded" v-if="show_rows">
         </slot>
+        <slot name="empty" v-if="rows.length==0 && loaded"></slot>
+<!--        <slot name="nomore" v-if="rows.length==0 && loaded">-->
+<!--          <slot name="empty" ></slot>-->
+<!--        </slot>-->
         <el-pagination
             v-if="paginate"
             layout="prev, pager, next"
@@ -34,11 +37,22 @@ export default {
             rows:[],
             current_page:1,
             total:0,
+            loaded:false,
         }
     },
     mounted(){
         // this.updateData()
     },
+  computed:{
+      show_rows(){
+        if(!this.$slots.empty){
+          return  true
+        }
+        if(!this.loaded){return  true}
+        if (this.rows.length >0){return true}
+        return  false
+      }
+  },
     methods:{
         pageChange(page){
             this.current_page = page
@@ -50,6 +64,7 @@ export default {
         },
         async updateData(){
             var resp = await this.getData({pageSize:this.pageSize,pageIndex: this.current_page,})
+            this.loaded=true
             this.rows= resp.rows
             this.total=resp.total
             if(resp.pageIndex){
