@@ -1,4 +1,4 @@
-import { cfg } from "../mb_cfg/main"
+// import { cfg } from "../mb_cfg/main"
 
 import {urlparse} from './urlparse'
 import {vuetool} from './vuetools'
