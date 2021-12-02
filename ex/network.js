@@ -95,8 +95,8 @@ export var network ={
         if(success){
             return ex._load_js(src,success)
         }else{
-            var p = new Promise(function(resolve,reject){
-                ex._load_js(src,function(){
+            var p = new Promise((resolve,reject)=>{
+                this._load_js(src,function(){
                     resolve()
                 })
             })

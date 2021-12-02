@@ -1,23 +1,32 @@
 
 
 import {pop_layer} from './poplayer'
-// import ex from 'weblib/ex'
 
-$(document).ready(function () { }).keydown(
-    function (e) {
+import ex from 'weblib/ex'
+import cdn from 'weblib/cdn.js'
 
-        if (e.which === 27) {
-            if(cfg.layer_index_stack.length>0){
-                layer.close(cfg.layer_index_stack[cfg.layer_index_stack.length-1]);
-            }
-        }
-    });
+// 为了使用layer暂时引入jquery
+ex.load_js(cdn.jquery)
+ex.load_js(cdn.layer)
+
+
+
+// 2021-12-12 注释，因为没看懂是做什么用的。
+// $(document).ready(function () { }).keydown(
+//     function (e) {
+
+//         if (e.which === 27) {
+//             if(cfg.layer_index_stack.length>0){
+//                 layer.close(cfg.layer_index_stack[cfg.layer_index_stack.length-1]);
+//             }
+//         }
+//     });
 
 var cfg={
     layer_index_stack:[],
     env:{
-        width:$(window).width(),
-        height:$(window).height(),
+        width: window.innerWidth,  //$(window).width(),
+        height: window.innerHeight //$(window).height(),
     },
     prompt(mycfg){
         //{
@@ -229,10 +238,15 @@ var cfg={
     }
 }
 
-$(window).resize(function(){
-    cfg.env.width=$(window).width()
-    cfg.env.height=$(window).height()
-})
+// 为了去掉 jquery以来，下面代码没有进行测试
+window.onresize =()=>{
+    cfg.env.width= window.innerWidth
+    cfg.env.height= window.innerHeight
+}
+// $(window).resize(function(){
+//     cfg.env.width=$(window).width()
+//     cfg.env.height=$(window).height()
+// })
 
 function assign(dst,src) {
     for(var key in src){
@@ -245,7 +259,6 @@ function assign(dst,src) {
 // assign(cfg,notify)
 
 // window.cfg = cfg
-import cdn from 'weblib/cdn.js'
-// ex.load_js(cdn.jquery)
+
 // ex.load_js(cdn.js)
 export default cfg
