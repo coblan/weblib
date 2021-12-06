@@ -45,7 +45,7 @@ export default {
   methods:{
       updateSrc(){
         this.loaded=false
-        if(this.defaultSrc){
+        if(this.defaultSrc && this.src){
           ex.load_image(this.src).then(()=>{
             this.loaded=true
           })
