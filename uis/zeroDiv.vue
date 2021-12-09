@@ -5,7 +5,7 @@
     </div>
   </div>
 </template>
-<style>
+<style scoped lang="scss">
 .zero-div{
   position: relative;
 }

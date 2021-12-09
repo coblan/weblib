@@ -7,6 +7,7 @@
 <!--          <slot name="empty" ></slot>-->
 <!--        </slot>-->
         <el-pagination
+            class="pagination"
             v-if="paginate"
             layout="prev, pager, next"
             :page-size='pageSize'
@@ -17,10 +18,10 @@
     </div>
 </template>
 <script>
-import Vue from 'vue';
-import { Pagination } from 'element-ui';
-
-Vue.component(Pagination.name, Pagination);
+// import Vue from 'vue';
+// import { Pagination } from 'element-ui';
+//
+// Vue.component(Pagination.name, Pagination);
 
 export default {
     props:{
@@ -76,3 +77,8 @@ export default {
 
 }
 </script>
+<style scoped lang="scss">
+.pagination{
+  text-align: right;
+}
+</style>
