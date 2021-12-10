@@ -55,14 +55,17 @@ export var  vuetool = {
                 if(filter){
                     if(typeof filter =='function' && filter(parent)){
                         return parent.childStore
+                    }else  if(ex.objContain(parent.childStore,filter)){
+                        // 新的全部用 childStore来定位
+                       return  parent.childStore
                     }else{
-                        if(ex.objContain(parent,filter) ){
-                            return parent.childStore
-                        }
-                    }
+                        parent = parent.$parent
+                     }
+
                 }else{
                     return parent.childStore
                 }
+
             }else {
                 parent = parent.$parent
             }
