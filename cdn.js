@@ -7,4 +7,5 @@ export default {
     jquery:'https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js',
     swiper_js:'https://cdn.jsdelivr.net/npm/swiper@4.5.0/dist/js/swiper.min.js',
     swiper_css:'https://cdn.jsdelivr.net/npm/swiper@4.5.0/dist/css/swiper.min.css',
+    font_awesome: 'https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css',
 }
