@@ -1,6 +1,6 @@
 <template>
     <div class="search-input2">
-      <input class="my-input" type="text" @keyup.enter="onSubmit" v-model="word">
+      <input class="my-input" type="text" @keyup.enter="onSubmit" v-model="word" placeholder="请输入查询信息">
       <div class="my-button" @click="onSubmit"><i class="fa fa-search" aria-hidden="true"></i>搜索</div>
     </div>
 </template>
@@ -28,10 +28,20 @@ export default{
   .my-input{
     outline: none;
     border: none;
+    flex-grow: 10;
+    background-color: #dadada;
+    &:focus{
+      background-color: white;
+    }
   }
   .my-button{
-    background-color: red;
+    cursor: pointer;
+    background-color: #94030e;
     color: white;
+    font-size: 90%;
+    padding: 3px 8px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
   }
 }
 </style>
