@@ -52,7 +52,7 @@
 <script>
 
 import cdn from '../cdn.js'
-
+import ex from 'weblib/ex'
 export default {
     props:{
         showPagination:{
