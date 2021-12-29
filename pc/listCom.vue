@@ -71,6 +71,7 @@ export default {
             if(resp.pageIndex){
               this.current_page= resp.pageIndex
             }
+            this.$emit('row-updated',this.rows)
 
         }
     }
