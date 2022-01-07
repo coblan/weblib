@@ -4,12 +4,19 @@
     <div>
       <input :class="{stretched:stretched}" id="myinput"  type="text" v-model="word" @keyup.enter="onSubmit">
     </div>
-    <div v-if="!stretched" @click="onStrech" class="search-placeholder">搜索</div>
-     <img @click="onSubmit" class="clickable" :src="require('weblib/assets/search.png')" alt="">
+    <div v-if="!stretched" @click="onStrech" class="search-placeholder">
+      <span style="white-space: nowrap;font-size: 90%">{{placeholder}}</span>
+    </div>
+     <img style="position: relative;top:1px;display: inline-block;margin-left: 6px;" @click="onSubmit" class="clickable" :src="require('weblib/assets/search.png')" alt="">
   </div>
 </template>
 <script>
 export  default  {
+  props:{
+    placeholder:{
+      default:'搜索'
+    }
+  },
   data(){
     return {
       stretched:false,
@@ -50,7 +57,8 @@ export  default  {
 
   .search-placeholder{
     color: #8B8B8B;
-    width: 60px;
+    width: auto;
+    opacity: .7;
   }
   input{
     //transition: all linear .3s;
