@@ -9,8 +9,8 @@
 <!--        <span v-else>{{elaspe}}s</span>-->
 <!--      </button>-->
 
-        <span v-if="elaspe<=0" class="clickable"  @click="sendPhoneCode">发送验证码</span>
-        <span v-else>{{elaspe}}s</span>
+        <span v-if="elaspe<=0" class="send-btn"  @click="sendPhoneCode">发送验证码</span>
+        <span v-else style="cursor: not-allowed">{{elaspe}}s</span>
 
     </template>
   </el-input>
@@ -59,7 +59,7 @@ export  default  {
     }
   },
   methods:{
-    sendPhoneCode(){
+    async sendPhoneCode(){
       if(!this.phone){
         cfg.toast('请先输入手机号码')
         return
@@ -69,7 +69,9 @@ export  default  {
         cfg.toast('手机号码不正确')
         return;
       }
-      this.sendCode(this.phone)
+      var resp = await this.sendCode(this.phone)
+      this.elaspe = 120
+      this.ticktock()
     },
     ticktock(){
       this.elaspe -=1
@@ -88,10 +90,15 @@ export  default  {
 .phone-validate{
   display: flex;
 }
-.phone-validate{
-  ::v-deep{
-    .el-input__inner:focus{border-color:#e5c878}
+/deep/{
+  .el-input-group__append{
+    width: 70px;
+    text-align: center;
   }
+}
+.send-btn{
+  cursor: pointer;
+  color: #4a4a4a;
 }
 .send-code{
   display: inline-block;
