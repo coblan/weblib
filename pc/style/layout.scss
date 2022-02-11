@@ -1,0 +1,25 @@
+.page-width-wrap{
+    width: 1200px;
+    margin: auto;
+    text-align: left;
+}
+html{
+    font-size: 14px;
+}
+
+@media screen and (min-width: 1920px) {
+    .page-width-wrap{
+        width: 1440px;
+    }
+    html{
+        font-size: 16.8px;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .page-width-wrap{
+        width: 980px;
+    }
+    html{
+        font-size: 11.43px;
+    }
+}
