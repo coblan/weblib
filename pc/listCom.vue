@@ -3,9 +3,7 @@
         <slot v-bind:rows="rows" v-bind:loaded="loaded" v-if="show_rows">
         </slot>
         <slot name="empty" v-if="rows.length==0 && loaded"></slot>
-<!--        <slot name="nomore" v-if="rows.length==0 && loaded">-->
-<!--          <slot name="empty" ></slot>-->
-<!--        </slot>-->
+
         <el-pagination
             class="pagination"
             v-if="paginate"
@@ -64,6 +62,8 @@ export default {
             return await this.updateData()
         },
         async updateData(){
+            this.loaded=false
+            this.rows = []
             var resp = await this.getData({pageSize:this.pageSize,pageIndex: this.current_page,})
             this.loaded=true
             this.rows= resp.rows
