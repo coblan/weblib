@@ -1,13 +1,9 @@
 <template>
 
-  <el-input placeholder="请输入验证码" v-model="inn_value"
+  <el-input placeholder="请输入验证码" v-model="row[head.name]"
             prefix-icon="el-icon-mobile"
   >
     <template v-slot:append>
-<!--      <button type="dark" @click="sendPhoneCode" :disabled="elaspe>0" style="line-height: 28px;" class="send-code">-->
-<!--        <span v-if="elaspe<=0"  >发送验证码</span>-->
-<!--        <span v-else>{{elaspe}}s</span>-->
-<!--      </button>-->
 
         <span v-if="elaspe<=0" class="send-btn"  @click="sendPhoneCode">发送验证码</span>
         <span v-else style="cursor: not-allowed">{{elaspe}}s</span>
@@ -31,11 +27,12 @@
 // import {pop_vue_com_ele} from 'weblib/pc_cfg/elePop'
 export  default  {
   props:{
-    value:{},
-    phone:{},
-    sendCode:{
-
-    }
+    head:{},
+    row:{},
+    // value:{},
+    // phone:{},
+    // sendCode:{
+    // }
   },
   data(){
 
@@ -60,16 +57,17 @@ export  default  {
   },
   methods:{
     async sendPhoneCode(){
-      if(!this.phone){
+      var phone = this.row[this.head.phone_field]
+      if(!phone){
         cfg.toast('请先输入手机号码')
         return
       }
       var myreg=/^1[3-9]\d{9}$/;
-      if (!myreg.test(this.phone)) {
+      if (!myreg.test(phone)) {
         cfg.toast('手机号码不正确')
         return;
       }
-      var resp = await this.sendCode(this.phone)
+      var resp = await this.head.sendCode(phone)
       this.elaspe = 120
       this.ticktock()
     },
