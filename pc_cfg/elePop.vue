@@ -40,6 +40,7 @@ var  elePop = {
         return {
             centerDialogVisible:true,
             hasfinish:false,
+            childStore:{name:'elePop',vc:this}
         }
     },
     watch:{
@@ -62,6 +63,9 @@ var  elePop = {
         // }
     },
   methods:{
+    close(){
+      this.centerDialogVisible=false
+    },
     onFinish(ee){
       // 必须prevent  finish事件会冒泡到 append_vue_dom函数中
       this.hasfinish=true
@@ -77,7 +81,7 @@ export function pop_vue_com_ele(editor,ctx){
     var pop_ctx = {
         editor:editor,
         width:ctx.width,
-        showClose:ctx.showClose,
+        showClose:ctx.showClose || false,
         // borderRadius:ctx.borderRadius,
         inn_ctx:ctx
     }
