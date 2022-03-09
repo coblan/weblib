@@ -2,6 +2,14 @@
 import axios from 'axios';
 
 export var network ={
+    async director_call(director_name,kws,option){
+        var resp = await axios.post(`${cfg.baseUrl}/dapi/${director_name}`,kws)
+        if(resp.data.success){
+            return resp.data.data
+        }else{
+            cfg.showError(resp.data.msg)
+        }
+    },
     get:function(url){
         //replace $.get
         return axios.get(url)
@@ -203,24 +211,24 @@ export var network ={
         })
         return p
     },
-    director_call:function(director_name,kws,callback){
-        //var post_data=[{fun:"director_call",director_name:director_name,kws:kws}]
-        if(callback && typeof callback=='function'){
-                if(ex.isEmpty(kws)){
-                    var post_data = {}
-                }else{
-                    var post_data= JSON.stringify(kws)
-                }
-            ex.post('/dapi/'+director_name,post_data,function(resp){
-                if(resp.success){
-                    callback( resp.data )
-                }
-            })
-        }else{
-            var worker = new DirectorCall(director_name,kws,callback)
-            return worker.run()
-        }
-    },
+    // director_call:function(director_name,kws,callback){
+    //     //var post_data=[{fun:"director_call",director_name:director_name,kws:kws}]
+    //     if(callback && typeof callback=='function'){
+    //             if(ex.isEmpty(kws)){
+    //                 var post_data = {}
+    //             }else{
+    //                 var post_data= JSON.stringify(kws)
+    //             }
+    //         ex.post('/dapi/'+director_name,post_data,function(resp){
+    //             if(resp.success){
+    //                 callback( resp.data )
+    //             }
+    //         })
+    //     }else{
+    //         var worker = new DirectorCall(director_name,kws,callback)
+    //         return worker.run()
+    //     }
+    // },
     //director_call:function(director_name,kws,callback){
     //    //var post_data=[{fun:"director_call",director_name:director_name,kws:kws}]
     //    if(ex.isEmpty(kws)){

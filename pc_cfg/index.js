@@ -7,7 +7,7 @@ import cdn from 'weblib/cdn.js'
 
 // 为了使用layer暂时引入jquery
 ex.load_js(cdn.jquery)
-ex.load_js(cdn.layer)
+var p_layer = ex.load_js(cdn.layer)
 
 
 
@@ -66,8 +66,9 @@ var cfg={
     warning:function(msg){
         layer.alert(msg,{title:['提示','color:white;background-color:#f0ad4e'],icon: 5})
     },
-    showError:function(msg){
-        layer.alert(msg, {icon: 5,title:'错误'});
+     showError:async function(msg){
+        await p_layer
+        return layer.alert(msg, {icon: 5,title:'错误'});
     },
     showTip:function(msg,...parm){
         layer.msg(msg,...parm)
