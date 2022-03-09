@@ -74,7 +74,7 @@ export default {
         //     console.log( this.$refs.vanlist.check() )
         // }, 1000);
         if(this.autoload){
-            Vue.nextTick(()=>{
+            this.$nextTick(()=>{
                 this.onRefresh()
             })
         }
@@ -82,6 +82,9 @@ export default {
         
     },
     methods:{
+      search(){
+        this.onRefresh()
+      },
         check(){
             this.$refs.vanlist.check()
         },

@@ -49,14 +49,14 @@ export var urlparse={
             var url=location.href
         }
         if(url){
-            var url_obj = ex.parseURL(url)
+            var url_obj = this.parseURL(url)
             var search = url_obj.params
         }else{
             url=location.href
-            var search=ex.parseSearch()
+            var search=this.parseSearch()
         }
         Object.assign(search,obj)
-        return url.replace(/(\?.*)|()$/,ex.searchfy(search,'?'))
+        return url.replace(/(\?.*)|()$/,this.searchfy(search,'?'))
     },
     parseURL: function(url) {
         var a = document.createElement('a');
