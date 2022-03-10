@@ -3,7 +3,12 @@ import axios from 'axios';
 
 export var network ={
     async director_call(director_name,kws,option){
-        var resp = await axios.post(`${cfg.baseUrl}/dapi/${director_name}`,kws)
+        if(cfg.baseUrl){
+            var url = `${cfg.baseUrl}/dapi/${director_name}`
+        }else{
+            var url = `/dapi/${director_name}`
+        }
+        var resp = await axios.post(url,kws)
         if(resp.data.success){
             return resp.data.data
         }else{

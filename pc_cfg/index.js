@@ -9,6 +9,7 @@ import cdn from 'weblib/cdn.js'
 ex.load_js(cdn.jquery)
 var p_layer = ex.load_js(cdn.layer)
 
+import { Loading } from 'element-ui';
 
 
 // 2021-12-12 注释，因为没看懂是做什么用的。
@@ -94,26 +95,29 @@ var cfg={
         layer.close(this._cloak_index)
     },
     show_load:function(msg){
-        if(msg){
-            this._loader_index =layer.msg(msg, {
-                icon: 16
-                ,shade: 0.01,
-                time:0
-            });
-        }else{
-            this._loader_index = layer.load(1)
-        }
+        this.loadingInstance  = Loading.service({});
+        // if(msg){
+        //     this._loader_index =layer.msg(msg, {
+        //         icon: 16
+        //         ,shade: 0.01,
+        //         time:0
+        //     });
+        // }else{
+        //     this._loader_index = layer.load(1)
+        // }
     },
     hide_load:function(delay,msg){
-        if(! this._loader_index){
-            return
-        }
-        layer.close(this._loader_index)
-        this._loader_index =null
-        if(delay){
-            var realMsg = msg || '操作成功'
-            layer.msg(realMsg,{time:delay})
-        }
+        if(!this.loadingInstance){return}
+        this.loadingInstance.close()
+        // if(! this._loader_index){
+        //     return
+        // }
+        // layer.close(this._loader_index)
+        // this._loader_index =null
+        // if(delay){
+        //     var realMsg = msg || '操作成功'
+        //     layer.msg(realMsg,{time:delay})
+        // }
     },
     pop_edit:function(fields_ctx){
 
