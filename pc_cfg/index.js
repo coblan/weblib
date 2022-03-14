@@ -5,6 +5,10 @@ import {pop_layer} from './poplayer'
 import ex from 'weblib/ex'
 import cdn from 'weblib/cdn.js'
 
+import { Message } from 'element-ui';
+import  {append_vue_dom} from 'weblib/pc_cfg/appendVueDom'
+import Toast from '../pc/toast.vue'
+
 // 为了使用layer暂时引入jquery
 ex.load_js(cdn.jquery)
 var p_layer = ex.load_js(cdn.layer)
@@ -74,8 +78,15 @@ var cfg={
     showTip:function(msg,...parm){
         layer.msg(msg,...parm)
     },
-    toast(msg,...parm){
-        layer.msg(msg,...parm)
+     toast: async (msg,...parm)=>{
+        // await p_layer
+        // layer.msg(msg,...parm)
+        // Toast(msg)
+        var com = append_vue_dom(Toast,{message:msg})
+        // Message(msg)
+    },
+    toastSuccess(msg){
+        Message.success(msg)    
     },
     //tr:{
     //    'picture_size_excceed':'图片大小不能超过{maxsize}'

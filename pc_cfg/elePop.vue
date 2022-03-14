@@ -85,7 +85,7 @@ export function pop_vue_com_ele(editor,ctx){
         // borderRadius:ctx.borderRadius,
         inn_ctx:ctx
     }
-    return append_vue_dom(elePop,pop_ctx)
+    return append_vue_dom(elePop,{ctx:pop_ctx})
 }
 export default elePop
 
