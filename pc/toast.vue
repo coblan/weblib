@@ -38,5 +38,6 @@ export default {
     color: white;
     padding: 6px 16px;
     border-radius: 2px;
+    z-index: 99999;
 }
 </style>

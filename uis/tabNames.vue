@@ -1,7 +1,11 @@
 <template>
     <div class="tab-names" :style="mysytle">
-        <div class="item" v-for="option in options" :key="option.name" @click='onClick(option)' 
-            :class="{active:value==option.name}">{{option.label}}</div>
+      <div style="display: contents" v-for="option in options" :key="option.name">
+        <component class="action" v-if="option.editor" :is="option.editor" v-bind="option.bind"></component>
+        <div v-else class="action"  @click='onClick(option)'
+             :class="{active:value==option.name}">{{option.label}}</div>
+      </div>
+
     </div>
 </template>
 
@@ -38,7 +42,7 @@ export default {
 .tab-names{
     display: flex;
 
-    .item{
+    .action{
         cursor: pointer;
         padding: 4px 6px;
     }
@@ -49,7 +53,7 @@ export default {
 
 .big1{
     font-size: 110%;
-    .item{
+    .action{
         padding: 5px 8px;
     }
 }
