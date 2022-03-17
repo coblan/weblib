@@ -1,4 +1,32 @@
 export var collection={
+    findIndex(myarray,obj_or_func){
+        for(var i=0;i<myarray.length;i++){
+            var now_obj=myarray[i]
+            if(typeof(obj_or_func)=='function'){
+                var func=obj_or_func
+                var match=func(now_obj)
+            }else{
+                var obj=obj_or_func
+                var match=true
+                for(var key in obj){
+                    if(key.startsWith('_')){
+                        continue
+                    }
+                    if (obj[key] !== now_obj[key]){
+                        match =false
+                        break
+                    }
+                }
+            }
+
+            if(match){
+                return i
+            }
+        }
+
+
+        return null
+    },
     findone:function (collection,obj_or_func) {
         for(var i=0;i<collection.length;i++){
             var now_obj=collection[i]
@@ -80,7 +108,7 @@ export var collection={
             }
         }else{
             var obj=func_or_obj
-            ex.each(array,function(doc){
+            this.each(array,function(doc){
                 var match=true
                 for(var key in obj){
                     if(doc[key]!== obj[key]){
