@@ -88,7 +88,7 @@ export  default  {
 .phone-validate{
   display: flex;
 }
-/deep/{
+::v-deep{
   .el-input-group__append{
     width: 70px;
     text-align: center;

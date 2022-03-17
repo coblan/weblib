@@ -5,10 +5,15 @@ import {pop_layer} from './poplayer'
 import ex from 'weblib/ex'
 import cdn from 'weblib/cdn.js'
 
+import { Message } from 'element-ui';
+import  {append_vue_dom} from 'weblib/pc_cfg/appendVueDom'
+import Toast from '../pc/toast.vue'
+
 // 为了使用layer暂时引入jquery
 ex.load_js(cdn.jquery)
 var p_layer = ex.load_js(cdn.layer)
 
+import { Loading } from 'element-ui';
 
 
 // 2021-12-12 注释，因为没看懂是做什么用的。
@@ -73,8 +78,15 @@ var cfg={
     showTip:function(msg,...parm){
         layer.msg(msg,...parm)
     },
-    toast(msg,...parm){
-        layer.msg(msg,...parm)
+     toast: async (msg,...parm)=>{
+        // await p_layer
+        // layer.msg(msg,...parm)
+        // Toast(msg)
+        var com = append_vue_dom(Toast,{message:msg})
+        // Message(msg)
+    },
+    toastSuccess(msg){
+        Message.success(msg)    
     },
     //tr:{
     //    'picture_size_excceed':'图片大小不能超过{maxsize}'
@@ -94,26 +106,29 @@ var cfg={
         layer.close(this._cloak_index)
     },
     show_load:function(msg){
-        if(msg){
-            this._loader_index =layer.msg(msg, {
-                icon: 16
-                ,shade: 0.01,
-                time:0
-            });
-        }else{
-            this._loader_index = layer.load(1)
-        }
+        this.loadingInstance  = Loading.service({});
+        // if(msg){
+        //     this._loader_index =layer.msg(msg, {
+        //         icon: 16
+        //         ,shade: 0.01,
+        //         time:0
+        //     });
+        // }else{
+        //     this._loader_index = layer.load(1)
+        // }
     },
     hide_load:function(delay,msg){
-        if(! this._loader_index){
-            return
-        }
-        layer.close(this._loader_index)
-        this._loader_index =null
-        if(delay){
-            var realMsg = msg || '操作成功'
-            layer.msg(realMsg,{time:delay})
-        }
+        if(!this.loadingInstance){return}
+        this.loadingInstance.close()
+        // if(! this._loader_index){
+        //     return
+        // }
+        // layer.close(this._loader_index)
+        // this._loader_index =null
+        // if(delay){
+        //     var realMsg = msg || '操作成功'
+        //     layer.msg(realMsg,{time:delay})
+        // }
     },
     pop_edit:function(fields_ctx){
 

@@ -30,7 +30,7 @@ export  default  {
   &.focus{
     border:1px solid #e5c878;
   }
-  ::v-deep{
+  ::v-deep {
     .el-input-group__prepend{
       border: none;
       background-color: white;

@@ -1,13 +1,40 @@
 
 import axios from 'axios';
+// import cfg from '../pc_cfg';
 
 export var network ={
-    async director_call(director_name,kws,option){
-        var resp = await axios.post(`${cfg.baseUrl}/dapi/${director_name}`,kws)
-        if(resp.data.success){
-            return resp.data.data
+    async cache(getter,setter){
+        var resp =await  Promise.resolve(getter())
+        if(resp){
+            return resp
         }else{
-            cfg.showError(resp.data.msg)
+            var resp = await Promise.resolve(setter()) 
+            return resp
+        }
+    },
+    async director_call(director_name,kws,option){
+        if(cfg.baseUrl){
+            var url = `${cfg.baseUrl}/dapi/${director_name}`
+        }else{
+            var url = `/dapi/${director_name}`
+        }
+        try{
+            var resp = await axios.post(url,kws)
+            if(resp.data.success){
+                return resp.data.data
+            }else{
+                cfg.showError(resp.data.msg)
+            }
+        }catch(error){
+            if(error.response.status==401){
+                if(cfg.login_fun){
+                    cfg.login_fun()
+                }else{
+                    cfg.toast('请先登录')
+                }
+                
+            }
+            throw error
         }
     },
     get:function(url){

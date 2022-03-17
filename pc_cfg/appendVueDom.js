@@ -26,7 +26,8 @@ document.body.appendChild(myDiv);
                 return createElement(this.component_name,{
                     attrs:{
                         id:'vue-dom-'+pop_id,
-                        ctx:this.ctx
+                        ...this.ctx,
+                        // ctx:this.ctx
                     },
                         on:{
                             finish:this.on_finish
