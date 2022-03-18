@@ -6,8 +6,11 @@ import ex from 'weblib/ex'
 import cdn from 'weblib/cdn.js'
 
 import { Message } from 'element-ui';
+import { MessageBox } from 'element-ui';
+
 import  {append_vue_dom} from 'weblib/pc_cfg/appendVueDom'
 import Toast from '../pc/toast.vue'
+
 
 // 为了使用layer暂时引入jquery
 ex.load_js(cdn.jquery)
@@ -49,31 +52,33 @@ var cfg={
         })
     },
     showMsg:function(msg,options){
+        return MessageBox.alert(msg,'提示')
 
-        return new Promise((resolve,reject)=>{
-            if(options){
-                layer.alert(msg,options,function(index){
-                    //do something
-                    layer.close(index);
-                    resolve()
-                });
-            }else{
-                layer.alert(msg,function(index){
-                    //do something
-                    layer.close(index);
-                    resolve()
-                });
-            }
+        // return new Promise((resolve,reject)=>{
+        //     if(options){
+        //         layer.alert(msg,options,function(index){
+        //             //do something
+        //             layer.close(index);
+        //             resolve()
+        //         });
+        //     }else{
+        //         layer.alert(msg,function(index){
+        //             //do something
+        //             layer.close(index);
+        //             resolve()
+        //         });
+        //     }
 
-        })
+        // })
 
     },
     warning:function(msg){
         layer.alert(msg,{title:['提示','color:white;background-color:#f0ad4e'],icon: 5})
     },
      showError:async function(msg){
-        await p_layer
-        return layer.alert(msg, {icon: 5,title:'错误'});
+        return MessageBox.alert(msg)
+        // await p_layer
+        // return layer.alert(msg, {icon: 5,title:'错误'});
     },
     showTip:function(msg,...parm){
         layer.msg(msg,...parm)

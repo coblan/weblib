@@ -1,6 +1,7 @@
 
 import axios from 'axios';
 // import cfg from '../pc_cfg';
+// import cfg from '../pc_cfg';
 
 export var network ={
     async cache(getter,setter){
@@ -30,7 +31,8 @@ export var network ={
                 if(cfg.login_fun){
                     cfg.login_fun()
                 }else{
-                    cfg.toast('请先登录')
+                    // cfg.toast('请先登录')
+                    cfg.showMsg('请先登录')
                 }
                 
             }

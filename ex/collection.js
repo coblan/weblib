@@ -1,5 +1,7 @@
 export var collection={
     findIndex(myarray,obj_or_func){
+        /* 找出一个满足条件的index
+         */
         for(var i=0;i<myarray.length;i++){
             var now_obj=myarray[i]
             if(typeof(obj_or_func)=='function'){
@@ -23,8 +25,6 @@ export var collection={
                 return i
             }
         }
-
-
         return null
     },
     findone:function (collection,obj_or_func) {
