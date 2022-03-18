@@ -15,7 +15,8 @@
             </div> -->
             
         </template>
-        <component :is='ctx.editor' :ctx='ctx.inn_ctx' @finish="onFinish"></component>
+<!--        // 2022/3/17 往com传递参数时，使用普通的bind模式-->
+        <component :is='ctx.editor' v-bind='ctx.inn_ctx' @finish="onFinish"></component>
         </el-dialog>
 </template>
 <script>
