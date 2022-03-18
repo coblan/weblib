@@ -106,7 +106,7 @@ var cfg={
         layer.close(this._cloak_index)
     },
     show_load:function(msg){
-        this.loadingInstance  = Loading.service({});
+        this.loadingInstance  = Loading.service({background:'rgba(255,255,255,.3)',style:'font-size:300%'});
         // if(msg){
         //     this._loader_index =layer.msg(msg, {
         //         icon: 16
