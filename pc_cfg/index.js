@@ -3,7 +3,7 @@
 import {pop_layer} from './poplayer'
 
 import ex from 'weblib/ex'
-import cdn from 'weblib/cdn.js'
+// import cdn from 'weblib/cdn.js'
 
 import { Message } from 'element-ui';
 import { MessageBox } from 'element-ui';
@@ -13,8 +13,8 @@ import Toast from '../pc/toast.vue'
 
 
 // 为了使用layer暂时引入jquery
-ex.load_js(cdn.jquery)
-var p_layer = ex.load_js(cdn.layer)
+// ex.load_js(cdn.jquery)
+// var p_layer = ex.load_js(cdn.layer)
 
 import { Loading } from 'element-ui';
 
