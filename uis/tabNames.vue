@@ -31,7 +31,8 @@ export default {
             if(this.$listeners.action){
                 this.$emit('action',op)
             }else{
-                this.value = op.name
+                // this.value = op.name
+                this.$emit('input',op.name)
             }
            
         }
@@ -41,7 +42,7 @@ export default {
 <style scoped lang='scss'>
 .tab-names{
     display: flex;
-
+    justify-content: space-between;
     .action{
         cursor: pointer;
         padding: 4px 6px;

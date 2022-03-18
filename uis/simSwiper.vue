@@ -66,7 +66,10 @@ export default {
         },
         delay:{
             default:3000,
-        }
+        },
+      direction: {
+          default:"horizontal",//"vertical"
+      },
 
     },
     components:{
@@ -99,7 +102,7 @@ export default {
                     delay: this.delay ,
                     disableOnInteraction: false,
                 },
-
+                direction:this.direction,
                 pagination: {
                     el: this.$el.querySelector('.swiper-pagination'),
                     clickable: true,
