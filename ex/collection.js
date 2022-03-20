@@ -187,6 +187,7 @@ export var collection={
                 }
             }
         }else{
+            debugger
             for(var i=0;i<array.length;i++){
                 if(array[i] == func_or_obj){
                     index_ls.push(i)

@@ -48,6 +48,9 @@ export default {
         padding: 4px 6px;
     }
 }
+.vertical{
+  flex-direction: column;
+}
 .active{
     color: var(--active_color);
 }
