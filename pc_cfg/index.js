@@ -75,8 +75,8 @@ var cfg={
     warning:function(msg){
         layer.alert(msg,{title:['提示','color:white;background-color:#f0ad4e'],icon: 5})
     },
-     showError:async function(msg){
-        return MessageBox.alert(msg)
+    showError:async function(msg){
+        return MessageBox.alert(msg,{type:'error',title:'错误提示'})
         // await p_layer
         // return layer.alert(msg, {icon: 5,title:'错误'});
     },
