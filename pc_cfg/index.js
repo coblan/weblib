@@ -53,24 +53,6 @@ var cfg={
     },
     showMsg:function(msg,options){
         return MessageBox.alert(msg,'提示')
-
-        // return new Promise((resolve,reject)=>{
-        //     if(options){
-        //         layer.alert(msg,options,function(index){
-        //             //do something
-        //             layer.close(index);
-        //             resolve()
-        //         });
-        //     }else{
-        //         layer.alert(msg,function(index){
-        //             //do something
-        //             layer.close(index);
-        //             resolve()
-        //         });
-        //     }
-
-        // })
-
     },
     warning:function(msg){
         layer.alert(msg,{title:['提示','color:white;background-color:#f0ad4e'],icon: 5})
@@ -112,28 +94,10 @@ var cfg={
     },
     show_load:function(msg){
         this.loadingInstance  = Loading.service({background:'rgba(255,255,255,.3)',style:'font-size:300%'});
-        // if(msg){
-        //     this._loader_index =layer.msg(msg, {
-        //         icon: 16
-        //         ,shade: 0.01,
-        //         time:0
-        //     });
-        // }else{
-        //     this._loader_index = layer.load(1)
-        // }
     },
     hide_load:function(delay,msg){
         if(!this.loadingInstance){return}
         this.loadingInstance.close()
-        // if(! this._loader_index){
-        //     return
-        // }
-        // layer.close(this._loader_index)
-        // this._loader_index =null
-        // if(delay){
-        //     var realMsg = msg || '操作成功'
-        //     layer.msg(realMsg,{time:delay})
-        // }
     },
     pop_edit:function(fields_ctx){
 
@@ -225,7 +189,7 @@ var cfg={
         layer.open(dc);
     },
     confirm:function(msg){
-
+        // return MessageBox.confirm(msg,'提示')
         return new Promise(function(resolve,reject){
             var index =layer.confirm(msg,
                 {icon: 3,

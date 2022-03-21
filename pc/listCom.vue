@@ -63,7 +63,7 @@ export default {
         },
         async updateData(){
             this.loaded=false
-            this.rows = []
+            // this.rows = []
             var resp = await this.getData({pageSize:this.pageSize,pageIndex: this.current_page,})
             this.loaded=true
             this.rows= resp.rows
