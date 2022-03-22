@@ -13,14 +13,24 @@ export var network ={
             return resp
         }
     },
-    async director_call(director_name,kws,option){
+    director_get(director_name,kws){
+        return this.director_call(director_name,kws,{get:true})
+    },
+    director_post(director_name,kws,option){
+        return this.director_call(director_name,kws,option)
+    },
+    async director_call(director_name,kws,option={}){
         if(cfg.baseUrl){
             var url = `${cfg.baseUrl}/dapi/${director_name}`
         }else{
             var url = `/dapi/${director_name}`
         }
         try{
-            var resp = await axios.post(url,kws)
+            if(option.get){
+                var resp = await axios.get(url,kws)
+            }else{
+                var resp = await axios.post(url,kws)
+            }
             if(resp.data.success){
                 return resp.data.data
             }else{

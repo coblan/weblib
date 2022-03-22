@@ -1,5 +1,5 @@
 <template>
-    <el-form :model="row" ref="innForm" label-width="0"  >
+    <el-form :model="row" ref="innForm" :label-width="labelWidth"  >
           <!-- <el-form-item :error="error.username"  prop="username">
             <el-input
                 placeholder="请输入手机号码"
@@ -21,7 +21,14 @@
 
 <script>
 export default {
-    props:['heads','row','error'],
+    props:  {
+      heads:{},
+      row:{},
+      error:{},
+      labelWidth:{
+        default:0
+      }
+    } ,
   data(){
       return {
 
