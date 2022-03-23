@@ -13,6 +13,14 @@ export var network ={
             return resp
         }
     },
+    async uploadFile(url,file_src){
+        let config = {
+            headers:{'Content-Type':'multipart/form-data'}
+          }; //添加请求头
+          let formData = new FormData();
+          formData.append('name', file_src);
+          return  axios.post(url,formData,config)
+    },
     director_get(director_name,kws){
         return this.director_call(director_name,kws,{get:true})
     },

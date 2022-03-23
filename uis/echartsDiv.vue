@@ -15,6 +15,8 @@
      },
      methods:{
          async draw(option){
+             await ex.load_js(cfg.js_lib.echarts)
+             
              var dom = this.$el.querySelector('.mychart')
             // var dom = document.getElementById('mychart')
              var myChart = echarts.init(dom);

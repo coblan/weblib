@@ -17,8 +17,9 @@ export default{
             // when input clear selected file, Component file-input need clear too.
             // Brower prohebit to set to Un-none string
             if (v == '') {
-                debugger
-                $(this.$el).val('')
+                // debugger
+                // $(this.$el).val('')
+              this.$el.value = ''
                 //this.$el.value = v
             }
         }
@@ -34,8 +35,9 @@ export default{
             this.$emit('input', this.files)
         },
         clear:function(){
-            debugger
-            $(this.$el).val('')
+            // debugger
+            // $(this.$el).val('')
+            this.$el.value = ''
         }
     }
 }
