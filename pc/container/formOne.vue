@@ -14,7 +14,8 @@
         <el-form-item :error="error[head.name]" v-for="head in heads" :label="head.label" :key="head.name"
                       :rules="head.rules"
                       :prop="head.name">
-            <component :is="head.editor" :head="head" :row="row"></component>
+            <component v-if="head.bind" :is="head.editor" v-bind="head.bind" v-model="row[head.name]"></component>
+            <component v-else :is="head.editor" :head="head" :row="row"></component>
         </el-form-item>
      </el-form>
 </template>

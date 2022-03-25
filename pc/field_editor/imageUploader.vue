@@ -18,8 +18,12 @@ export  default  {
     fileInput
   },
   props:{
-    head:{},
-    row:{},
+    uploadUrl:{
+      default:'/d/upload'
+    },
+    value:{},
+    // head:{},
+    // row:{},
     // value:{
     //   default:()=>''
     // },
@@ -43,9 +47,10 @@ export  default  {
         return
       }
       cfg.show_load()
-      var resp =  await ex.uploadFile(this.head.uploadUrl,nv[0])
+      var resp =  await ex.uploadFile(this.uploadUrl,nv[0])
       this.image_src=resp.data[0]
-      this.row[this.head.name] = this.image_src
+      // this.row[this.head.name] = this.image_src
+      this.$emit('input',this.image_src)
       cfg.hide_load()
     },
   },
@@ -54,18 +59,19 @@ export  default  {
     selectFile(){
       this.$refs.fl.select()
     },
-    addtime_media_url(url){
-      if(this.addTime){
-        return ex.appendSearch(media_url(url),{t:Date.now()})
-      }else{
-        return media_url(url)
-      }
-
-    },
+    // addtime_media_url(url){
+    //   if(this.addTime){
+    //     return ex.appendSearch(media_url(url),{t:Date.now()})
+    //   }else{
+    //     return media_url(url)
+    //   }
+    //
+    // },
     clear(){
       this.myfiles=[]
       this.image_src=''
-      this.row[this.head.name] = this.image_src
+      this.$emit('input',this.image_src)
+      // this.row[this.head.name] = this.image_src
     }
   }
 }
