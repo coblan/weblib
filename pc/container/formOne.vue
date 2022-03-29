@@ -11,7 +11,7 @@
             <passwordInput v-model="row.password" placeholder="请输入密码"></passwordInput>
           </el-form-item> -->
 
-        <el-form-item :error="error[head.name]" v-for="head in heads" :label="head.label" :key="head.name"
+        <el-form-item :error="error[head.name]" v-for="head in normed_heads" :label="head.label" :key="head.name"
                       :rules="head.rules"
                       :prop="head.name">
             <component v-if="head.bind" :is="head.editor" v-bind="head.bind" v-model="row[head.name]"></component>
@@ -21,13 +21,14 @@
 </template>
 
 <script>
+import ex from 'weblib/ex'
 export default {
     props:  {
       heads:{},
       row:{},
       error:{},
       labelWidth:{
-        default:0
+        default:"0"
       }
     } ,
   data(){
@@ -38,6 +39,15 @@ export default {
   computed:{
     elForm(){
       return this.$refs.innForm
+    },
+    normed_heads(){
+      return ex.filter(this.heads,head=>{
+        if(head.show){
+          return head.show()
+        }else{
+          return  true
+        }
+      })
     }
   },
   methods:{
