@@ -42,8 +42,8 @@ export default {
     },
     normed_heads(){
       return ex.filter(this.heads,head=>{
-        if(head.show){
-          return head.show()
+        if(head.show_fun){
+          return head.show_fun({row:this.row})
         }else{
           return  true
         }

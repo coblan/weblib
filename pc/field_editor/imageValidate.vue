@@ -1,27 +1,22 @@
 <template>
-    <el-input class="validate-code" placeholder="验证码" v-model="inn_value">
-          <template slot="append" ><img :src="imageUrl" alt=""></template>
+    <el-input class="validate-code" placeholder="验证码" v-model="row[head.name]">
+          <template slot="append" ><img :src="head.validate_image" alt=""></template>
      </el-input>
 </template>
 <script>
 export default{
     props:{
-        value:{},
-        imageUrl:{},
+        head:{},
+        row:{},
+        // value:{},
+        // imageUrl:{},
     },
     data(){
         return {
-            inn_value:this.value
+            inn_value:this.row[this.head.name]
         }
     },
-    watch:{
-        value(nv){
-            this.inn_value = this.value
-        },
-        inn_value(nv){
-            this.$emit('input',nv)
-        }
-    }
+ 
 }
 </script>
 
