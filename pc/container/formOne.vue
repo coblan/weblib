@@ -1,5 +1,5 @@
 <template>
-    <el-form :model="row" ref="innForm" label-width="0"  >
+    <el-form :model="row" ref="innForm" :label-width="labelWidth"  >
           <!-- <el-form-item :error="error.username"  prop="username">
             <el-input
                 placeholder="请输入手机号码"
@@ -11,17 +11,26 @@
             <passwordInput v-model="row.password" placeholder="请输入密码"></passwordInput>
           </el-form-item> -->
 
-        <el-form-item :error="error[head.name]" v-for="head in heads" :label="head.label" :key="head.name"
+        <el-form-item :error="error[head.name]" v-for="head in normed_heads" :label="head.label" :key="head.name"
                       :rules="head.rules"
                       :prop="head.name">
-            <component :is="head.editor" :head="head" :row="row"></component>
+            <component v-if="head.bind" :is="head.editor" v-bind="head.bind" v-model="row[head.name]"></component>
+            <component v-else :is="head.editor" :head="head" :row="row"></component>
         </el-form-item>
      </el-form>
 </template>
 
 <script>
+import ex from 'weblib/ex'
 export default {
-    props:['heads','row','error'],
+    props:  {
+      heads:{},
+      row:{},
+      error:{},
+      labelWidth:{
+        default:"0"
+      }
+    } ,
   data(){
       return {
 
@@ -30,6 +39,15 @@ export default {
   computed:{
     elForm(){
       return this.$refs.innForm
+    },
+    normed_heads(){
+      return ex.filter(this.heads,head=>{
+        if(head.show_fun){
+          return head.show_fun({row:this.row})
+        }else{
+          return  true
+        }
+      })
     }
   },
   methods:{
