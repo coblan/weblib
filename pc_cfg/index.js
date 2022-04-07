@@ -75,6 +75,9 @@ var cfg={
     toastSuccess(msg){
         Message.success(msg)    
     },
+    toastError(msg){
+        Message.error(msg)
+    },
     //tr:{
     //    'picture_size_excceed':'图片大小不能超过{maxsize}'
     //},
