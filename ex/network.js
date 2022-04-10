@@ -21,8 +21,13 @@ export var network ={
           formData.append('name', file_src);
           return  axios.post(url,formData,config)
     },
-    director_get(director_name,kws){
-        return this.director_call(director_name,kws,{get:true})
+    director_get(director_name,kws,option){
+        if(option){
+            option.get=true
+        }else{
+            option = {get:true}
+        }
+        return this.director_call(director_name,kws,option)
     },
     director_post(director_name,kws,option){
         return this.director_call(director_name,kws,option)
@@ -45,7 +50,11 @@ export var network ={
                 cfg.showError(resp.data.msg)
             }
         }catch(error){
-            if(error.response.status==401){
+            cfg.hide_load()
+            if(option.empty401){
+                return {}
+            }
+            if( error.response.status==401){
                 if(cfg.login_fun){
                     cfg.login_fun()
                 }else{
