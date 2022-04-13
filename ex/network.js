@@ -40,7 +40,7 @@ export var network ={
         }
         try{
             if(option.get){
-                var resp = await axios.get(url,kws)
+                var resp = await axios.get(url, { params: kws })
             }else{
                 var resp = await axios.post(url,kws)
             }
