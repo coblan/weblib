@@ -1,4 +1,6 @@
-export default {
+
+var jsdelivr_over = true
+var real_cdn = {
     wowjs:'https://cdn.jsdelivr.net/npm/wow.js@1.2.2/dist/wow.min.js',
     velocity:'https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js',
     animate_css:'https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css',
@@ -10,3 +12,11 @@ export default {
     font_awesome: 'https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css',
     echarts:'https://lib.baomitu.com/echarts/5.2.1/echarts.min.js',
 }
+
+if(jsdelivr_over){
+    Object.assign(real_cdn,{
+        font_awesome: 'https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css',
+    })
+}
+
+export default real_cdn
