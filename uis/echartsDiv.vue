@@ -17,19 +17,20 @@ import ex from 'weblib/ex'
          async draw(option){
              await ex.load_js(cfg.js_lib.echarts)
              console.log(cfg.js_lib.echarts)
-             
+
+           if(!this.myChart){
              var dom = this.$el.querySelector('.mychart')
-            // var dom = document.getElementById('mychart')
-             var myChart = echarts.init(dom);
-        
+             // var dom = document.getElementById('mychart')
+             this. myChart = echarts.init(dom);
+           }
              // 使用刚指定的配置项和数据显示图表。
            if(option){
-             myChart.setOption(option);
+             this.myChart.setOption(option);
            }else{
-             myChart.setOption(this.option);
+             this.myChart.setOption(this.option);
            }
 
-         }
+         },
      }
  }
 </script>
