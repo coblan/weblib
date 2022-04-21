@@ -1,6 +1,6 @@
 <template>
   <div class="out-wrap">
-    <div class="inn-wrap">
+    <div class="inn-wrap beauty-scorll-bar">
       <slot></slot>
     </div>
   </div>
@@ -70,6 +70,8 @@ export default {
 .inn-wrap{
   background-color: white;
   margin: auto;
+  overflow: auto;
+
 }
 </style>
 
