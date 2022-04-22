@@ -1,19 +1,13 @@
-import Vue from 'vue';
+// import Vue from 'vue';
 
 import { Toast } from 'vant';
-Vue.use(Toast);
+// Vue.use(Toast);
 
 import { Dialog } from 'vant';
+// Vue.use(Dialog);
 
 
-
-import 'vant/lib/toast/index.css';
-
-// import { MessageBox, } from 'mint-ui';
-// import 'mint-ui/lib/indicator/style.css'; Indicator
-// import 'mint-ui/lib/message-box/style.css';
-
-// import './base.scss'
+// import 'vant/lib/toast/index.css';
 import './page.scss'
 
 export default {
