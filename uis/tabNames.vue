@@ -1,7 +1,8 @@
 <template>
     <div class="tab-names" :style="mysytle">
-      <div style="display: contents" v-for="option in options" :key="option.name">
-        <component class="action" v-if="option.editor" :is="option.editor" v-bind="option.bind"></component>
+      <div  v-for="option in options" :key="option.name">
+        <component class="action" :class="{active:value==option.name}"
+                   v-if="option.editor" :is="option.editor" v-bind="option.bind" @click.native="onClick(option)"></component>
         <div v-else class="action"  @click='onClick(option)'
              :class="{active:value==option.name}">{{option.label}}</div>
       </div>
@@ -42,7 +43,7 @@ export default {
 <style scoped lang='scss'>
 .tab-names{
     display: flex;
-    justify-content: space-between;
+    align-items: center;
     .action{
         cursor: pointer;
         padding: 4px 6px;

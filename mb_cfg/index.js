@@ -36,17 +36,23 @@ export default {
     },
     show_load(){
         // return Indicator.open({spinnerType: 'fading-circle'})
-        Toast.loading({
-            // message: '加载中...',
-            duration:0,
-            forbidClick: true,
-          });
+        if(!this._loading){
+            this._loading= Toast.loading({
+                // message: '加载中...',
+                duration:0,
+                forbidClick: true,
+            });
+        }
     },
     toast(msg){
         Toast(msg);
     },
     hide_load(){
         // Indicator.close()
-        Toast.clear()
+        if(this._loading){
+            this._loading .clear()
+            delete this._loading
+        }
+        // Toast.clear()
     }
 }
