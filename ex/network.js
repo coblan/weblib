@@ -395,6 +395,7 @@ export var network ={
                     iframe = document.createElement('iframe');
                     iframe.id = "hiddenDownloader";
                     iframe.style.visibility = 'hidden';
+                    iframe.style.display='none'
                     document.body.appendChild(iframe);
                 }
                 iframe.src = strPath;
@@ -402,6 +403,7 @@ export var network ={
             return false;
     },
     downLoadImage(downloadName, url) {
+        //url是dataurl ,或者 url
         var getImageDataURL = (image)=> {
             // 创建画布
             const canvas = document.createElement('canvas');
