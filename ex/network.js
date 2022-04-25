@@ -2,6 +2,7 @@
 import axios from 'axios';
 // import cfg from '../pc_cfg';
 // import cfg from '../pc_cfg';
+import {FreePromise} from 'weblib/ex/promise'
 
 export var network ={
     async cache(getter,setter){
@@ -29,10 +30,11 @@ export var network ={
         }
         return this.director_call(director_name,kws,option)
     },
-    director_post(director_name,kws,option){
+     director_post(director_name,kws,option){
         return this.director_call(director_name,kws,option)
     },
     async director_call(director_name,kws,option={}){
+        var success = new FreePromise()
         if(cfg.baseUrl){
             var url = `${cfg.baseUrl}/dapi/${director_name}`
         }else{
@@ -45,10 +47,12 @@ export var network ={
                 var resp = await axios.post(url,kws)
             }
             if(resp.data.success){
-                return resp.data.data
+                success.resolve(resp.data.data)
             }else{
                 cfg.showError(resp.data.msg)
+                cfg.hide_load()
             }
+            return await success.promise
         }catch(error){
             cfg.hide_load()
             if(option.empty401){

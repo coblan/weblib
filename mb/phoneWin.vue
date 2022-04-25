@@ -1,6 +1,6 @@
 <template>
   <div class="out-wrap">
-    <div class="inn-wrap beauty-scorll-bar">
+    <div class="inn-wrap" :class="{'beauty-scorll-bar':!is_phone}">
       <slot></slot>
     </div>
   </div>
@@ -10,6 +10,11 @@
 <script>
 import ex from 'weblib/ex'
 export default {
+    data(){
+        return {
+          is_phone:true,
+        }
+    },
     mounted(){
        this.updateSize()
     },
@@ -50,6 +55,7 @@ export default {
                 }
                 if(ex.os.isPc && !ex.os.isTablet){
                     fullheight()
+                    this.is_phone = false
                 }else if(ex.os.isTablet){
                     fullsize()
 
