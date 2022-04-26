@@ -3,3 +3,12 @@
   white-space: nowrap;
   overflow: hidden;
 }
+.ellipsis-2{
+  // 参考2行的，只能在webkit生效
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: break-spaces;
+}

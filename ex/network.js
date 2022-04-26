@@ -2,6 +2,7 @@
 import axios from 'axios';
 // import cfg from '../pc_cfg';
 // import cfg from '../pc_cfg';
+import {FreePromise} from 'weblib/ex/promise'
 
 export var network ={
     async cache(getter,setter){
@@ -29,10 +30,11 @@ export var network ={
         }
         return this.director_call(director_name,kws,option)
     },
-    director_post(director_name,kws,option){
+     director_post(director_name,kws,option){
         return this.director_call(director_name,kws,option)
     },
     async director_call(director_name,kws,option={}){
+        var success = new FreePromise()
         if(cfg.baseUrl){
             var url = `${cfg.baseUrl}/dapi/${director_name}`
         }else{
@@ -45,10 +47,12 @@ export var network ={
                 var resp = await axios.post(url,kws)
             }
             if(resp.data.success){
-                return resp.data.data
+                success.resolve(resp.data.data)
             }else{
                 cfg.showError(resp.data.msg)
+                cfg.hide_load()
             }
+            return await success.promise
         }catch(error){
             cfg.hide_load()
             if(option.empty401){
@@ -396,11 +400,43 @@ export var network ={
                     iframe.id = "hiddenDownloader";
                     // iframe.style.visibility = 'hidden';
                     iframe.style.display = 'none';
+                    iframe.style.display='none'
                     document.body.appendChild(iframe);
                 }
                 iframe.src = strPath;
             }
             return false;
+    },
+    downLoadImage(downloadName, url) {
+        //url是dataurl ,或者 url
+        var getImageDataURL = (image)=> {
+            // 创建画布
+            const canvas = document.createElement('canvas');
+            canvas.width = image.width;
+            canvas.height = image.height;
+            const ctx = canvas.getContext('2d');
+            // 以图片为背景剪裁画布
+            ctx.drawImage(image, 0, 0, image.width, image.height);
+            // 获取图片后缀名
+            const extension = image.src.substring(image.src.lastIndexOf('.') + 1).toLowerCase();
+            // 某些图片 url 可能没有后缀名，默认是 png
+            return canvas.toDataURL('image/' + extension, 1);
+        }
+
+        const tag = document.createElement('a');
+        // 此属性的值就是下载时图片的名称，注意，名称中不能有半角点，否则下载时后缀名会错误
+        tag.setAttribute('download', downloadName.replace(/\./g, '。'));
+
+        const image = new Image();
+        // 设置 image 的 url, 添加时间戳，防止浏览器缓存图片
+        image.src = url //+ '?time=' + new Date().getTime();
+        //重要，设置 crossOrigin 属性，否则图片跨域会报错
+        image.setAttribute('crossOrigin', 'Anonymous');
+        // 图片未加载完成时操作会报错
+        image.onload = () => {
+            tag.href = getImageDataURL(image);
+            tag.click();
+        };
     },
     uploadfile({url,accept}={}){
         this.__upload_url =url
