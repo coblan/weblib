@@ -13,6 +13,7 @@ import {FreePromise} from './promise'
 import {obj_control} from './obj'
 import {old} from './old'
 import math from "./math";
+import local from "./local";
 var ex ={}
 
 Object.assign(ex,urlparse)
@@ -25,6 +26,7 @@ Object.assign(ex,rabbit)
 Object.assign(ex,obj_control)
 Object.assign(ex,old)
 Object.assign(ex,math)
+Object.assign(ex,local)
 
 ex.os = os
 ex.vld = get_validator()
