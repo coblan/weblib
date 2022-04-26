@@ -394,7 +394,8 @@ export var network ={
                 if (iframe == null) {
                     iframe = document.createElement('iframe');
                     iframe.id = "hiddenDownloader";
-                    iframe.style.visibility = 'hidden';
+                    // iframe.style.visibility = 'hidden';
+                    iframe.style.display = 'none';
                     document.body.appendChild(iframe);
                 }
                 iframe.src = strPath;
