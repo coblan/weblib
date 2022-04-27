@@ -1,5 +1,5 @@
 <template>
-    <div class="pull-wrap">
+    <div class="pull-wrap beauty-scroll-bar">
     <van-list
         ref='vanlist'
         v-model="loading"
@@ -162,7 +162,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    overflow: auto;
+    //overflow: auto;
 }
 .myinn{
     /* min-height: 100%; */
