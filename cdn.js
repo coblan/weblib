@@ -16,6 +16,7 @@ var real_cdn = {
 if(jsdelivr_over){
     Object.assign(real_cdn,{
         font_awesome: 'https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css',
+        stomp_js:'https://cdn.bootcdn.net/ajax/libs/stomp.js/2.3.3/stomp.min.js'
     })
 }
 
