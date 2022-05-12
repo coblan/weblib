@@ -1,5 +1,5 @@
 //rabbit={{ rabbit | jsonify }}
-import cdn from 'weblib/cdn.js'
+// import cdn from 'weblib/cdn.js'
 
 export var rabbit={
     /*
@@ -12,7 +12,7 @@ export var rabbit={
 
     getStomp({url,user,pswd}){
         return new Promise((resolve,reject)=>{
-             ex.load_js(cdn.stomp_js).then(()=>{
+             ex.load_js(cfg.js_lib.stompjs).then(()=>{
                 let client = Stomp.client(url);
                 client.reconnect_delay = 5000;
                 function on_connect(x){
@@ -32,7 +32,7 @@ export var rabbit={
     },
 
     stompInit(ctx){
-        
+        debugger
         var stompObj ={
             _stomp_client:null,
             // _lstool_list:[],
@@ -127,7 +127,7 @@ export var rabbit={
             }
         }
         stompObj._lstool=new ListenTool(stompObj)
-        ex.load_js(cdn.stomp_js, ()=> {
+        ex.load_js(cfg.js_lib.stompjs, ()=> {
             stompObj.init()
         })
         return stompObj

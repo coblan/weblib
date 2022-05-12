@@ -80,7 +80,7 @@ export var old={
          * @styles_str : css string or <style>css string</style>
          * */
         window._appended_css=window._appended_css || []
-        if(ex.isin(styles_str,window._appended_css)){
+        if(this.isin(styles_str,window._appended_css)){
             return
         }else{
             window._appended_css.push(styles_str)
