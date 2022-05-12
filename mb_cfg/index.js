@@ -28,11 +28,11 @@ export default {
             
           })
     },
-    show_load(){
+    show_load(msg){
         // return Indicator.open({spinnerType: 'fading-circle'})
         if(!this._loading){
             this._loading= Toast.loading({
-                // message: '加载中...',
+                 message: msg,
                 duration:0,
                 forbidClick: true,
             });
