@@ -19,6 +19,7 @@ export default {
     duration:{}
   },
   data(){
+    debugger
     return {
       currentRate: 0,
     }

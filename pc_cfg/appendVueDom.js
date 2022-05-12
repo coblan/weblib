@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import cfg from "../mb_cfg";
 export  function append_vue_dom (editor,ctx){
     // row,head ->//model_name,relat_field
     var pop_id =new Date().getTime()
@@ -17,6 +18,8 @@ document.body.appendChild(myDiv);
 
     return new Promise((resolve,reject)=>{
         new Vue({
+            store:cfg.store,
+            router:cfg.router,
             el:'#vue-dom-'+pop_id,
             data:{
                 ctx:ctx,
