@@ -73,8 +73,8 @@ export default {
     },
     methods:{
         async update(){
-            ex.load_css(cdn.swiper_css)
-            await ex.load_js(cdn.swiper_js)
+            ex.load_css(cfg.js_lib.swiper_css)
+            await ex.load_js(cfg.js_lib.swiper)
             var self =this
             var swiper = new Swiper(this.$el.querySelector('.swiper-container'), {
                 slidesPerView: this.slidesPerView ,
