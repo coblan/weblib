@@ -6,10 +6,10 @@ export  var os = function() {
         isAndroid = /(?:Android)/.test(ua),
         isFireFox = /(?:Firefox)/.test(ua),
         isChrome = /(?:Chrome|CriOS)/.test(ua),
-        isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),
+        isiPad =/(?:iPad|PlayBook)/.test(ua),
+        isTablet = isiPad || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),
         isiPhone = /(?:iPhone)/.test(ua) && !isTablet,
-        isPc = !isiPhone && !isAndroid && !isSymbian,
-        isiPad =/(?:iPad|PlayBook)/.test(ua);
+        isPc = !isiPhone && !isAndroid && !isSymbian;
         return {
             isTablet: isTablet,
             isiPhone: isiPhone,
