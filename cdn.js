@@ -15,9 +15,15 @@ var real_cdn = {
 
 if(jsdelivr_over){
     Object.assign(real_cdn,{
-        font_awesome: 'https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css',
+        font_awesome: 'https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css',
         stomp_js:'https://cdn.bootcdn.net/ajax/libs/stomp.js/2.3.3/stomp.min.js',
         md5:'https://lib.baomitu.com/blueimp-md5/2.19.0/js/md5.min.js',
+        swiper_js:'https://lib.baomitu.com/Swiper/4.5.1/js/swiper.min.js',
+        swiper_css:'https://lib.baomitu.com/Swiper/4.5.1/css/swiper.min.css',
+        velocity:'https://lib.baomitu.com/velocity/1.5.2/velocity.min.js',
+        animate_css:'https://lib.baomitu.com/animate.css/3.7.2/animate.min.css',
+        wowjs:'https://lib.baomitu.com/wow/1.1.2/wow.min.js',
+        
     })
 }
 
