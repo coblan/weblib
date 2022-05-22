@@ -1,6 +1,10 @@
 <template>
     <div class="loading-mask">
-        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+      <div class="bg">
+
+      </div>
+        <!-- <i class="fa fa-circle-o-notch fa-spin fa-2x fa-fw"></i> -->
+        <i class="el-icon-loading" style="font-size:26px"></i>
     </div>
 </template>
 <style scoped lang='scss'>
@@ -13,5 +17,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: rgba(250,250,250,.5);
+
+  .bg{
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    filter: blur(2px);
+  }
 }
 </style>
