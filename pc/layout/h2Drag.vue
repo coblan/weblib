@@ -14,6 +14,7 @@ import ex from 'weblib/ex'
 export default {
   props:{
     fixLeft:{},
+    initLeft:{},
     saveName:{},
   },
   computed:{
@@ -27,11 +28,15 @@ export default {
     }
   },
   mounted(){
+   
     var self = this
       var resize = this.$el.querySelector(".resize");
       var left = this.$el.querySelector(".left");
       var right = this.$el.querySelector(".right");
       var box = this.$el;
+    if(this.initLeft){
+      left.style.width = this.initLeft
+    }
       resize.onmousedown = function(e){
         var startX = e.clientX;
         resize.left = resize.offsetLeft;
@@ -101,6 +106,8 @@ export default {
   height:100%;
   cursor: w-resize;
   background-color: #f4f4f4;
+  flex-grow: 0;
+  flex-shrink: 0;
   //float:left;
 }
 
