@@ -1,10 +1,18 @@
 
-import axios from 'axios';
+// import axios from 'axios';
 // import cfg from '../pc_cfg';
 // import cfg from '../pc_cfg';
 import {FreePromise} from 'weblib/ex/promise'
 
 export var network ={
+    async axios_get(url,  ctx){
+        await this.load_js(cfg.js_lib.axios)
+        return axios.get(url,ctx)
+    },
+    async axios_post(url,formData,config){
+        await this.load_js(cfg.js_lib.axios)
+        return axios.post(url,formData,config)
+    },
     async cache(getter,setter){
         var resp =await  Promise.resolve(getter())
         if(resp){
@@ -20,7 +28,7 @@ export var network ={
           }; //添加请求头
           let formData = new FormData();
           formData.append('name', file_src);
-          return  axios.post(url,formData,config)
+          return  this.axios_post(url,formData,config)
     },
     director_get(director_name,kws,option){
         if(option){
@@ -42,9 +50,9 @@ export var network ={
         }
         try{
             if(option.get){
-                var resp = await axios.get(url, { params: kws })
+                var resp = await this. axios_get(url, { params: kws })
             }else{
-                var resp = await axios.post(url,kws)
+                var resp = await this.axios_post(url,kws)
             }
             if(resp.data.success){
                 success.resolve(resp.data.data)
@@ -72,7 +80,7 @@ export var network ={
     },
     get:function(url){
         //replace $.get
-        return axios.get(url)
+        return this.axios_get(url)
     },
     post:function(url,data,callback){
         if(callback){
