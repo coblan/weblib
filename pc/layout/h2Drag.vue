@@ -4,7 +4,7 @@
       <slot name="left"></slot>
     </div>
     <div class="resize"></div>
-    <div class="right">
+    <div class="right" :style="myRight">
       <slot name="right"></slot>
     </div>
   </div>
@@ -13,9 +13,10 @@
 import ex from 'weblib/ex'
 export default {
   props:{
-    fixLeft:{},
-    initLeft:{},
+    fixLeft:{}, // 固定左边
+    initLeft:{}, // 左边初始值
     saveName:{},
+    fixRight:{} // 固定右边
   },
   computed:{
     myleft(){
@@ -24,6 +25,19 @@ export default {
           'flexGrow':0,
           'flexShrink':0
         }
+      }else{
+        return {
+              'flexGrow':10,
+             
+          }
+      }
+    },
+    myRight(){
+      if(this.fixRight){
+          return {
+              'flexGrow':0,
+              'flexShrink':0
+          }
       }
     }
   },
@@ -49,8 +63,20 @@ export default {
           if(moveLen>maxT-10) moveLen = maxT-10;
 
           resize.style.left = moveLen;
+
           left.style.width = moveLen + "px";
-          // right.style.width = (box.clientWidth - moveLen - 5) + "px";
+          right.style.width = (box.clientWidth - moveLen - 5) + "px";
+
+          // if(self.fixLeft){
+          //   left.style.width = moveLen + "px";
+          // }else if(self.fixRight){
+          //   left.style.width ='auto'
+          //   right.style.width = (box.clientWidth - moveLen - 5) + "px";
+          // }else{
+          //   left.style.width = moveLen + "px";
+          //   right.style.width = (box.clientWidth - moveLen - 5) + "px";
+          // }
+          
 
         }
         document.onmouseup = function(evt){
@@ -58,19 +84,40 @@ export default {
           document.onmouseup = null;
           resize.releaseCapture && resize.releaseCapture();
           if(self.saveName){
-            ex.localSet(self.saveName,{
+            if(self.fixLeft){
+              ex.localSet(self.saveName,{
               left: left.style.width,
               // right:right.style.width
               })
+            }else if(self.fixRight){
+                left.style.width = 'auto'
+               ex.localSet(self.saveName,{
+                  // left: left.style.width,
+                    right:right.style.width
+                  })
+            }else{
+              ex.localSet(self.saveName,{
+                left: left.style.width,
+                right:right.style.width
+              })
+            }
+            
           }
         }
         resize.setCapture && resize.setCapture();
         return false;
       }
-      if(this.saveName){
-          var size= ex.localGet(this.saveName,{})
-          left.style.width = size.left;
-          // right.style.width = size.right;
+      if(self.saveName){
+          var size= ex.localGet(self.saveName,{})
+          if(self.fixLeft){
+            left.style.width = size.left;
+          }else if(self.fixRight){
+            right.style.width = size.right;
+          }else{
+            left.style.width = size.left;
+            right.style.width = size.right;
+          }
+         
       }
   },
   methods:{
