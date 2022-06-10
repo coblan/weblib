@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import cfg from "../mb_cfg";
+// import cfg from "../mb_cfg";
 export  function append_vue_dom (editor,ctx){
     // row,head ->//model_name,relat_field
     var pop_id =new Date().getTime()
