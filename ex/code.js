@@ -56,9 +56,9 @@ export var code ={
             return obj[bb[1]] != target
         }
     },
-    eval:function(js,scope){
+    eval:async function(js,scope){
         var rt=''
-        var ll = eval(js)
+        var ll = await eval(js)
         if(rt !=''){
             return rt
         }else{
