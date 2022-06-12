@@ -17,6 +17,7 @@ import Toast from '../pc/toast.vue'
 // var p_layer = ex.load_js(cdn.layer)
 
 import { Loading } from 'element-ui';
+// import { VueLoaderPlugin } from 'vue-loader';
 
 
 // 2021-12-12 注释，因为没看懂是做什么用的。
@@ -31,6 +32,7 @@ import { Loading } from 'element-ui';
 //     });
 
 var cfg={
+    // bus:new Vue(),
     layer_index_stack:[],
     env:{
         width: window.innerWidth,  //$(window).width(),
