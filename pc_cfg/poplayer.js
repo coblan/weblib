@@ -1,5 +1,69 @@
 import Vue from 'vue'
-export  function pop_layer (com_ctx,component_name,callback,layerConfig){
+import ex from '../ex'
+
+export async function  layer_vue_com(com,com_ctx,config){
+    // config.area
+    debugger
+    await ex.load_js(cfg.js_lib.jquery)
+    await ex.load_js(cfg.js_lib.layer)
+    var future = new ex.FreePromise()
+    var pop_id =new Date().getTime()
+
+    var layer_config = {
+        type: 1,
+        area: config.area,// ['800px', '500px'],
+        title: com_ctx.title,
+        zIndex:1000,
+        // resize:true,
+        // resizing: function(layero){
+        //     update_size.call(this,layero)
+        // },
+        // restore(layero, index){
+        //     update_size.call(this,layero)
+        // },
+        // full(layero, index){
+        //     update_size.call(this,layero)
+        // },
+        content:`<div id="fields-pop-${pop_id}" class="pop-layer" style="height: 100%;width: 100%"></div>`,
+        end: function () {
+            if(callback){
+                callback('__end_by_user')
+            }
+            ex.remove(cfg.layer_index_stack,opened_layer_index)
+        }
+    }
+    if(config){
+        Object.assign(layer_config,config)
+    }
+    debugger
+    var opened_layer_index = layer.open(layer_config);
+    new Vue({
+        el:'#fields-pop-'+pop_id,
+        data:{
+            com_ctx:com_ctx,
+            component_name:component_name,
+        },
+        render(createElement){
+            return createElement(this.component_name,{
+                    attrs:{
+                        ctx:this.com_ctx
+                    },
+                    on:{
+                        finish:this.on_finish
+                    }
+                }
+
+            )
+        },
+        methods:{
+            on_finish:function(e){
+                future.resolve(e)
+            }
+        }
+    })
+}
+
+export  function _pop_layer (com_ctx,component_name,callback,layerConfig){
     // row,head ->//model_name,relat_field
 
     function  update_size(layero){

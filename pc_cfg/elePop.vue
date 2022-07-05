@@ -2,11 +2,14 @@
 <!-- no-border -->
       <el-dialog
         class='no-title'
+        :class="type"
         :visible.sync="centerDialogVisible"
         :width='ctx.width'
+        :modal="modal"
         :close-on-click-modal="false"
         :show-close="ctx.showClose==undefined?true:ctx.showClose"
-        center>
+        center
+        >
         <template v-slot:title>
             <!-- <div style="display:flex">
                 <div>标题</div>
@@ -32,7 +35,13 @@ var  elePop = {
          * no-border:无边框
          * borderRadius:5px  圆角
          */
-        ctx:{}
+        ctx:{},
+        modal:{
+            default:true
+        },
+        type:{
+
+        }
     },
     components:{
       elDialog:Dialog
@@ -83,10 +92,13 @@ export function pop_vue_com_ele(editor,ctx){
         editor:editor,
         width:ctx.width,
         showClose:ctx.showClose || false,
+
         // borderRadius:ctx.borderRadius,
         inn_ctx:ctx
     }
-    return append_vue_dom(elePop,{ctx:pop_ctx})
+    var ff = ctx.modal
+    var type = ctx.type
+    return append_vue_dom(elePop,{ctx:pop_ctx,modal:ff,type:type})
 }
 export default elePop
 
@@ -110,6 +122,15 @@ export default elePop
     background: none;
 }
 
+.right{
+  ::v-deep{
+    .el-dialog{
+      position: absolute;
+      right: 40px;
+    }
+  }
+
+}
 
 
 </style>
