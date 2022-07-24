@@ -1,18 +1,20 @@
 import {network} from './network.js'
 export default {
-    async call(func){
-        var resp = await network.load_js('https://lib.baomitu.com/velocity/1.5.2/velocity.min.js')
-        if ($.Velocity){
-            window.Velocity = $.Velocity
-        }
-        func(Velocity)
-    },
+    // async call(func){
+    //     var resp = await network.load_js('https://lib.baomitu.com/velocity/1.5.2/velocity.min.js')
+    //     if ($.Velocity){
+    //         window.Velocity = $.Velocity
+    //     }
+    //     func(Velocity)
+    // },
     async velocityCall(func){
-        var resp = await network.load_js('https://lib.baomitu.com/velocity/1.5.2/velocity.min.js')
-        if ($.Velocity){
-            window.Velocity = $.Velocity
+        if(!window.Velocity){
+            var resp = await network.load_js('https://lib.baomitu.com/velocity/1.5.2/velocity.min.js')
+            if ($.Velocity){
+                window.Velocity = $.Velocity
+            }
         }
-        func(Velocity)
+        func()
     },
 
     async parallax(scene){
