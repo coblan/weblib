@@ -62,6 +62,7 @@ export var network ={
             }
             return await success.promise
         }catch(error){
+            console.log(error)
             cfg.hide_load()
             if(option.empty401){
                 return {}

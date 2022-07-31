@@ -24,6 +24,7 @@ if(jsdelivr_over){
         animate_css:'https://lib.baomitu.com/animate.css/3.7.2/animate.min.css',
         wowjs:'https://lib.baomitu.com/wow/1.1.2/wow.min.js',
         layer:'https://lib.baomitu.com/layer/3.5.1/layer.min.js',
+        axios:"https://lib.baomitu.com/axios/0.26.1/axios.min.js",
         
     })
 }
