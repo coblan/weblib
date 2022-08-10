@@ -187,7 +187,6 @@ export var collection={
                 }
             }
         }else{
-            debugger
             for(var i=0;i<array.length;i++){
                 if(array[i] == func_or_obj){
                     index_ls.push(i)
@@ -258,6 +257,50 @@ export var collection={
         },
         union(a,b){
             return a.concat(b.filter(function(v){ return !(a.indexOf(v) > -1)}));
+        }
+    },
+    set:{
+         intersect(setA, setB) {
+            let _intersection = new Set();
+            for (let elem of setB) {
+              if (setA.has(elem)) {
+                _intersection.add(elem);
+              }
+            }
+            return _intersection;
+        },
+         difference(setA, setB) {
+            let _difference = new Set(setA);
+            for (let elem of setB) {
+                _difference.delete(elem);
+            }
+            return _difference;
+        },
+        union(setA, setB) {
+            let _union = new Set(setA);
+            for (let elem of setB) {
+                _union.add(elem);
+            }
+            return _union;
+        },
+        symmetricDifference(setA, setB) {
+            let _difference = new Set(setA);
+            for (let elem of setB) {
+                if (_difference.has(elem)) {
+                    _difference.delete(elem);
+                } else {
+                    _difference.add(elem);
+                }
+            }
+            return _difference;
+        },
+        isSuperset(set, subset) {
+            for (let elem of subset) {
+                if (!set.has(elem)) {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 
