@@ -14,6 +14,7 @@ import {obj_control} from './obj'
 import {old} from './old'
 import math from "./math";
 import local from "./local";
+import file from './file'
 // import animate from './animate'
 var ex ={}
 
@@ -28,6 +29,7 @@ Object.assign(ex,obj_control)
 Object.assign(ex,old)
 Object.assign(ex,math)
 Object.assign(ex,local)
+Object.assign(ex,file)
 // Object.assign(ex,animate)
 
 ex.os = os
