@@ -1,6 +1,14 @@
 import Vue from 'vue'
 
 export var  vuetool = {
+    vueNextTick(){
+        return new Promise((resolve,reject)=>{
+            Vue.nextTick(resolve)
+            // setTimeout(()=>{
+            //     resolve()
+            // },5000)
+        })
+    },
     vueSuper:function(self,kws){
         var mixin =kws.mixin
         var name=kws.fun
