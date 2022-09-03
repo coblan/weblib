@@ -112,6 +112,34 @@ export default  {
       eleLink.click();
       // 然后移除
       document.body.removeChild(eleLink);
+  },
+  async convertToImage  (container, options = {}) {
+    await this.load_js('https://lib.baomitu.com/html2canvas/1.4.1/html2canvas.min.js')
+    // 设置放大倍数
+    const scale = window.devicePixelRatio;
+  
+    // 传入节点原始宽高
+    const _width = container.offsetWidth;
+    const _height = container.offsetHeight;
+  
+    let { width, height } = options;
+    width = width || _width;
+    height = height || _height;
+  
+    // html2canvas配置项
+    const ops = {
+      scale,
+      // width,
+      // height,
+      useCORS: true,
+      allowTaint: false,
+      ...options
+    };
+  
+    return html2canvas(container, ops).then(canvas => {
+      // 返回图片的二进制数据
+      return canvas.toDataURL("image/png");
+    });
   }
  
 }
