@@ -11,12 +11,12 @@
             />
 
             <van-popup v-model="showPicker" position="bottom">
-            <van-picker
-                show-toolbar
-                :columns="columns"
-                @confirm="onConfirm"
-                @cancel="showPicker = false"
-            />
+                <van-picker
+                    show-toolbar
+                    :columns="columns"
+                    @confirm="onConfirm"
+                    @cancel="showPicker = false"
+                />
             </van-popup>
     </div>
 </template>

@@ -57,6 +57,7 @@ import fields_editor from './fields_editor/index.js'
     }
   }
 }
+// 黑色主题
 .dark{
   ::v-deep{
     .van-field{
@@ -82,6 +83,9 @@ import fields_editor from './fields_editor/index.js'
       background-color: #4a474d;
       font-size: 80%;
       border-radius: .3rem;
+    }
+    input::-webkit-input-placeholder {
+        color: #858585;
     }
   }
 }
