@@ -48,5 +48,8 @@ export default {
             delete this._loading
         }
         // Toast.clear()
-    }
+    },
+    // openPage(name,data){
+
+    // }
 }

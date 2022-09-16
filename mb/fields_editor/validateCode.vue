@@ -8,7 +8,7 @@
         >
         <template v-slot:button>
             <!-- <van-button size="mini" plain >获取验证码</van-button> -->
-            <div class="validate-btn">获取验证码</div>
+            <div class="validate-btn" @click="sendCode">{{show_label}}</div>
         </template>
     </van-field>
     </div>
@@ -20,6 +20,34 @@
             head:{},
             row:{}
         },
+        data(){
+            return {
+                elapse:0,
+            }
+        },
+        mounted(){
+            setInterval(()=>{
+                if(this.elapse >0){
+                    this.elapse -=1
+                }
+            },1000)
+        },
+        computed:{
+            show_label(){
+                if(this.elapse==0){
+                    return '获取验证码'
+                }else{
+                    return this.elapse
+                }
+            }
+        },
+        methods:{
+            sendCode(){
+                if(this.elapse ==0){
+                    this.head.sendCode({vc:this})
+                }
+            }
+        }
     }
 </script>
 <style scoped lang="scss">
@@ -29,6 +57,8 @@
         // backdrop-filter: invert(10%);
         border-radius: 5px;
         overflow: hidden;
+        min-width: 60px;
+        text-align: center;
     }
 
 </style>
