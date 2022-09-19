@@ -8,7 +8,9 @@
                 <div class="contry-code" v-if="head.country_code">
                     +86
                 </div>
-                <input class="my-input" v-model="row[head.name]" type="text" :placeholder="head.placeholder || '请输入手机'">
+                <input class="my-input" v-model="row[head.name]" type="text" 
+                :readonly="head.readonly"
+                :placeholder="head.placeholder || '请输入手机'">
                 
             </template>
         </van-field>
