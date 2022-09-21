@@ -10,7 +10,12 @@ import { Dialog } from 'vant';
 // import 'vant/lib/toast/index.css';
 import './page.scss'
 
+import {pop_vue_com_vant} from './vanPop.vue'
+
 export default {
+    pop_vue_com(com,ctx){
+        return pop_vue_com_vant(com,ctx)
+    },
     showMsg(msg){
         // return  MessageBox.alert(msg)
         return Dialog({ message: msg });

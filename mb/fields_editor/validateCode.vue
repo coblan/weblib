@@ -37,7 +37,7 @@
                 if(this.elapse==0){
                     return '获取验证码'
                 }else{
-                    return this.elapse
+                    return  `${this.elapse}s` 
                 }
             }
         },
