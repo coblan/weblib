@@ -46,14 +46,14 @@ export var vanPop = {
 
 }
 
-export function pop_vue_com_vant(editor,ctx){
+export function pop_vue_com_vant(editor,ctx,option=null){
     var pop_ctx = {
       editor:editor,
       width:ctx.width,
       showClose:ctx.showClose || false,
       inn_ctx:ctx
     }
-    return append_vue_dom(vanPop,{ctx:pop_ctx})
+    return append_vue_dom(vanPop,{ctx:pop_ctx},option)
 }
 export default  vanPop;
 </script>

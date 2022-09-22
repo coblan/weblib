@@ -4,6 +4,7 @@ import { Toast } from 'vant';
 // Vue.use(Toast);
 
 import { Dialog } from 'vant';
+import ex from '../ex';
 // Vue.use(Dialog);
 
 
@@ -13,8 +14,17 @@ import './page.scss'
 import {pop_vue_com_vant} from './vanPop.vue'
 
 export default {
-    pop_vue_com(com,ctx){
-        return pop_vue_com_vant(com,ctx)
+    async pop_vue_com(com,ctx){
+        
+        var option = {}
+        ex.pushState({},'','',()=>{
+            option.close()
+        })
+
+        var resp = await pop_vue_com_vant(com,ctx,option)
+        history.back()
+
+        return resp
     },
     showMsg(msg){
         // return  MessageBox.alert(msg)

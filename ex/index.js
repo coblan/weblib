@@ -16,7 +16,40 @@ import math from "./math";
 import local from "./local";
 import file from './file'
 // import animate from './animate'
-var ex ={}
+var ex ={
+    _current_index:1,
+    getIndex(){
+        this._current_index +=1
+        return this._current_index
+    },
+    _bind_popstate:false,
+    _popstate_map:{},
+    pushState(state, unused, url,callback){
+        state._index = this.getIndex()
+        state.test = 123
+        history.replaceState(state, unused, '');
+        history.pushState('', '', url);
+        if(callback){
+            this._popstate_map[state._index] = callback
+        }
+     
+        if(!this._bind_popstate){
+            
+            this._bind_popstate = true
+            window.addEventListener('popstate' , (event) =>{
+                if(event.state && event.state._index ){
+                    if( this._popstate_map[event.state._index] ){
+                        this._popstate_map[event.state._index] (event)
+                        delete this._popstate_map[event.state._index]
+                    }
+                }
+            })
+            
+        }
+        
+
+    }
+}
 
 Object.assign(ex,urlparse)
 Object.assign(ex,network)

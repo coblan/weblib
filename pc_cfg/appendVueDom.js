@@ -1,6 +1,6 @@
 import Vue from 'vue'
 // import cfg from "../mb_cfg";
-export  function append_vue_dom (editor,ctx){
+export  function append_vue_dom (editor,ctx,option={}){
     // row,head ->//model_name,relat_field
     var pop_id =new Date().getTime()
 
@@ -15,6 +15,16 @@ myDiv.id = `vue-dom-${pop_id}`
 
 //Finally, append the element to the HTML body
 document.body.appendChild(myDiv);
+
+if(option){
+    option.close=()=>{
+        var dom = document.getElementById('vue-dom-'+pop_id)
+        if(dom){
+           dom .remove();
+        }
+       
+    }
+}
 
     return new Promise((resolve,reject)=>{
         new Vue({
