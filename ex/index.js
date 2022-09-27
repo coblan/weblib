@@ -47,8 +47,16 @@ var ex ={
             
         }
         
-
-    }
+    },
+    // _back_index:window.history.length,
+    // canBack(){
+    //     debugger
+    //     if(window.history.length > this._back_index){
+    //         return true
+    //     }else{
+    //         return false
+    //     }
+    // }
 }
 
 Object.assign(ex,urlparse)

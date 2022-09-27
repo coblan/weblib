@@ -64,6 +64,7 @@ export default {
         }
         // Toast.clear()
     },
+
     // openPage(name,data){
 
     // }
