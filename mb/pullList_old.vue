@@ -1,47 +1,28 @@
 <template>
     <div class="pull-wrap beauty-scroll-bar">
-        <van-pull-refresh  v-model="freshing" @refresh="onRefresh" style="height: 100%;" :disabled="scroll_top>10">
-                <!-- <van-list
-                    ref='vanlist'
-                    v-model="loading"
-                    :finished="finished"
-                    :finished-text="finishedText"
-                    :immediate-check="false"
-                    @load="onLoad"
-                    @touchmove.stop
-                >
-                        <slot>
-                                here is content
+    <van-list
+        ref='vanlist'
+        v-model="loading"
+        :finished="finished"
+        :finished-text="finishedText"
+        :immediate-check="false"
+        @load="onLoad"
+        @touchmove.stop
+    >
+            <!-- :immediate-check="false" -->
+    <van-pull-refresh  v-model="freshing" @refresh="onRefresh" style="min-height: 100%;">
+        <!-- <div class="myinn"> -->
+            <slot>
+                    here is content
 
-                        </slot>
-                
-            
-                </van-list> -->
-
-                <scrollLoadList
-                    style="height: 100%;"
-                    ref='vanlist'
-                    v-model="loading"
-                    :finished="finished"
-                    :finished-text="finishedText"
-                    @load="onLoad"
-                    @touchmove.stop
-                    @scrollTop="scroll_top=$event"
-                >
-                    <slot>
-                                here is content
-
-                        </slot>
-                </scrollLoadList>
-</van-pull-refresh>
+            </slot>
+      
+    </van-pull-refresh>
+    </van-list>
     </div>
 </template>
 <script>
-import scrollLoadList from './scrollLoadList.vue'
 export default {
-    components:{
-        scrollLoadList,
-    },
     props:{
         // pageIndex:{
         //     default:1
@@ -63,7 +44,6 @@ export default {
     },
     data(){
         return {
-            scroll_top:0,
             page_index:0,
             freshing:false,
             loading:false,
@@ -95,7 +75,6 @@ export default {
         
     },
     methods:{
-        
       search(){
         this.onRefresh()
       },
