@@ -1,5 +1,5 @@
 <template>
-    <div class="scroll-load-list">
+    <div class="scroll-load-list beauty-scorll-bar">
         <div class="inn-wrap">
             <slot></slot>
         </div>
