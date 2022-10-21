@@ -66,7 +66,7 @@ export default{
     overflow: auto;
 }
 .footer{
-    background-color: rgb(237, 237, 237);
+    //background-color: rgb(237, 237, 237);
     display: flex;
     align-items: center;
     justify-content: center;
