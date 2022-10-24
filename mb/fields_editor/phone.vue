@@ -8,7 +8,7 @@
                 <div class="contry-code" v-if="head.country_code">
                     +86
                 </div>
-                <input class="my-input" v-model="row[head.name]" type="text" 
+                <input class="my-input" v-model="number_value" type="text" 
                 :readonly="head.readonly"
                 :placeholder="head.placeholder || '请输入手机'">
                 
@@ -22,6 +22,45 @@
             head:{},
             row:{}
         },
+        data(){
+            return {
+                number_value:'',
+                country_code :this.head.country_code?this.head.country_code[0]:'',
+                splitter:this.head.country_splitter || '-'
+            }
+        },
+        mounted(){
+            this.update_number_from_out()
+        },
+        watch:{
+            number_value(nv){
+                if(this.head.country_code){
+                    this.row[this.head.name] = `${this.country_code}${this.splitter}${nv}`
+                }else{
+                    this.row[this.head.name] = nv
+                }
+            }
+        },
+        methods:{
+            update_number_from_out(){
+                var phone = this.row[this.head.name]
+                if(phone){
+                    if(this.head.country_code){
+                        var ls = phone.split(this.splitter)
+                        if(ls.length==2){
+                            this.country_code = ls[0]
+                            this.number_value = ls[1]
+                        } 
+                    }else{
+                        this.number_value = phone
+                    }
+                    
+                }else{
+                    this.number_value = ''
+                }
+                
+            }
+        }
         
     }
 </script>
