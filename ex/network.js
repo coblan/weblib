@@ -31,15 +31,55 @@ export var network ={
           return  this.axios_post(url,formData,config)
     },
     director_get(director_name,kws,option){
+        debugger
         if(option){
             option.get=true
         }else{
             option = {get:true}
         }
-        return this.director_call(director_name,kws,option)
+        return this._director_call(director_name,kws,option)
     },
      director_post(director_name,kws,option){
-        return this.director_call(director_name,kws,option)
+        return this._director_call(director_name,kws,option)
+    },
+    async _director_call(director_name,kws,option={}){
+        // 在director中使用时，可能会和原来的ex.director_call冲突，所以重命名
+        var success = new FreePromise()
+        if(cfg.baseUrl){
+            var url = `${cfg.baseUrl}/dapi/${director_name}`
+        }else{
+            var url = `/dapi/${director_name}`
+        }
+        try{
+            if(option.get){
+                var resp = await this. axios_get(url, { params: kws })
+            }else{
+                var resp = await this.axios_post(url,kws)
+            }
+            if(resp.data.success){
+                success.resolve(resp.data.data)
+            }else{
+                cfg.showError(resp.data.msg)
+                cfg.hide_load()
+            }
+            return await success.promise
+        }catch(error){
+            console.log(error)
+            cfg.hide_load()
+            if(option.empty401){
+                return {}
+            }
+            if( error.response.status==401){
+                if(cfg.login_fun){
+                    cfg.login_fun()
+                }else{
+                    // cfg.toast('请先登录')
+                    cfg.showMsg('请先登录')
+                }
+                
+            }
+            throw error
+        }
     },
     async director_call(director_name,kws,option={}){
         var success = new FreePromise()
