@@ -2,12 +2,21 @@
 // import axios from 'axios';
 // import cfg from '../pc_cfg';
 // import cfg from '../pc_cfg';
+// import axios from 'axios';
 import {FreePromise} from 'weblib/ex/promise'
 
 export var network ={
     async axios_get(url,  ctx){
         await this.load_js(cfg.js_lib.axios)
-        return axios.get(url,ctx)
+        const config = {
+            headers:{
+              realtype:'json_get'
+            }
+          };
+
+          debugger 
+          return axios.post(url,ctx.params,config)
+        // return axios.get(url,ctx)
     },
     async axios_post(url,formData,config){
         await this.load_js(cfg.js_lib.axios)
@@ -77,52 +86,54 @@ export var network ={
                     cfg.showMsg('请先登录')
                 }
                 
+            }else{
+                cfg.showError(error.toString())
             }
-            throw error
+            // throw error
         }
     },
-    async director_call(director_name,kws,option={}){
-        var success = new FreePromise()
-        if(cfg.baseUrl){
-            var url = `${cfg.baseUrl}/dapi/${director_name}`
-        }else{
-            var url = `/dapi/${director_name}`
-        }
-        try{
-            if(option.get){
-                var resp = await this. axios_get(url, { params: kws })
-            }else{
-                var resp = await this.axios_post(url,kws)
-            }
-            if(resp.data.success){
-                success.resolve(resp.data.data)
-            }else{
-                cfg.showError(resp.data.msg)
-                cfg.hide_load()
-            }
-            return await success.promise
-        }catch(error){
-            console.log(error)
-            cfg.hide_load()
-            if(option.empty401){
-                return {}
-            }
-            if( error.response.status==401){
-                if(cfg.login_fun){
-                    cfg.login_fun()
-                }else{
-                    // cfg.toast('请先登录')
-                    cfg.showMsg('请先登录')
-                }
+    // async director_call(director_name,kws,option={}){
+    //     var success = new FreePromise()
+    //     if(cfg.baseUrl){
+    //         var url = `${cfg.baseUrl}/dapi/${director_name}`
+    //     }else{
+    //         var url = `/dapi/${director_name}`
+    //     }
+    //     try{
+    //         if(option.get){
+    //             var resp = await this. axios_get(url, { params: kws })
+    //         }else{
+    //             var resp = await this.axios_post(url,kws)
+    //         }
+    //         if(resp.data.success){
+    //             success.resolve(resp.data.data)
+    //         }else{
+    //             cfg.showError(resp.data.msg)
+    //             cfg.hide_load()
+    //         }
+    //         return await success.promise
+    //     }catch(error){
+    //         console.log(error)
+    //         cfg.hide_load()
+    //         if(option.empty401){
+    //             return {}
+    //         }
+    //         if( error.response.status==401){
+    //             if(cfg.login_fun){
+    //                 cfg.login_fun()
+    //             }else{
+    //                 // cfg.toast('请先登录')
+    //                 cfg.showMsg('请先登录')
+    //             }
                 
-            }
-            throw error
-        }
-    },
-    get:function(url){
-        //replace $.get
-        return this.axios_get(url)
-    },
+    //         }
+    //         throw error
+    //     }
+    // },
+    // get:function(url){
+    //     //replace $.get
+    //     return this.axios_get(url)
+    // },
     post:function(url,data,callback){
         if(callback){
             ex._post(url,data,callback)
