@@ -4,7 +4,7 @@
             v-model="row[head.name]"
             :name="head.name"
             :label="head.label"
-            :placeholder="head.placeholder || '请输入'"
+            :placeholder="head.placeholder || '请输入验证码'"
         >
         <template v-slot:button>
             <!-- <van-button size="mini" plain >获取验证码</van-button> -->
