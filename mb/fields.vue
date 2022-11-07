@@ -1,5 +1,5 @@
 <template>
-    <van-form @submit="onSubmit">
+    <van-form  @submit="onSubmit">
         <component class="field-row" v-for="head in heads" :key="head.name" :is="head.editor" :head="head" :row="row"></component>
 
 <!--        <van-field-->
@@ -56,6 +56,10 @@ import fields_editor from './fields_editor/index.js'
       display: block;
     }
   }
+}
+
+.white{
+
 }
 // 黑色主题
 .dark{
