@@ -6,17 +6,17 @@
       <img style="max-width: 2rem" @click="update_code" :src="img_url" alt="">
     </div>
     <div style="display: flex;justify-content: center">
-      <mybtn style="width: 4rem;margin: .3rem auto" @click.native="submit">确定</mybtn>
+      <div class="my-btn" style="width: 4rem;margin: .3rem auto" @click="submit">确定</div>
 <!--      <van-button style="width: 4rem;margin: .3rem auto" @click.native="submit" type="primary" size="small">确定</van-button>-->
     </div>
   </div>
 </template>
 <script>
 import  ex from 'weblib/ex'
-import mybtn from '@/components/mybtn.vue'
+// import mybtn from '@/components/mybtn.vue'
 export default {
   components:{
-    mybtn,
+    // mybtn,
   },
   props:{
     image_fun:{}
@@ -65,5 +65,16 @@ export default {
   background-color: white;
   padding: .2rem;
   border-radius: .1rem;
+}
+
+.my-btn{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: .8rem;
+  background-color: #f5900d;
+  border-radius: .5rem;
+  color: white;
 }
 </style>

@@ -9,7 +9,7 @@ Vue.component('com-field-phone',phone)
 Vue.component('com-field-validate-code',validateCode)
 Vue.component('com-field-password',password)
 
-Vue.component('com-field-address', async (resolve, reject)=> {
-    var com = await import(/* webpackChunkName: 'fields_import' */'./address.vue')
-    resolve(com.default)
-})
+// Vue.component('com-field-address', async (resolve, reject)=> {
+//     var com = await import(/* webpackChunkName: 'fields_import' */'./address.vue')
+//     resolve(com.default)
+// })
