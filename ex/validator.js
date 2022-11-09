@@ -27,7 +27,21 @@ export function get_validator(){
                     resolve()
                 }
             })
-            
+        },
+        syncValidate(dc,validate_dc){
+            var has_error = false
+            for(var k in validate_dc){
+                if(has_error){break}
+                let validator_list = validate_dc[k]
+                for(var i=0;i<validator_list.length;i++){
+                    let vldtor =validator_list[i]
+                    let error_msg = vldtor(dc[k])
+                    if(error_msg){
+                        has_error=true
+                        return error_msg
+                    }
+                }
+            }
         },
         // notify(error){
         //     cfg.toast(error)
