@@ -40,7 +40,6 @@ export default {
 <style scoped lang="scss">
 .qrcode-picture{
   position: relative;
-
 }
 .mycode{
   ::v-deep{
