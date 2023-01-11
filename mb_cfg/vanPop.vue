@@ -1,6 +1,6 @@
 <template>
   <div class="my-pop">
-    <van-popup :closeable="ctx.closeable"  v-model="show" @close="onClose" :get-container="getContainer" :close-on-click-overlay="false">
+    <van-popup :closeable="ctx.closeable"  v-model="show" @close="onClose" :get-container="getContainer" :close-on-click-overlay="true">
       <component :is='ctx.editor' v-bind='ctx.inn_ctx' @finish="onFinish"></component>
     </van-popup>
   </div>
