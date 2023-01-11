@@ -13,14 +13,19 @@ export var network ={
               realtype:'json_get'
             }
           };
-
-          debugger 
+        // 因为有时请求的参数过于复杂，使用原始的get请求会出问题，所以使用了post+header来模拟get请求。
+        // 后台识别到realtype=='json_get'时，就会使用fast_director_view去调用director_view。
           return axios.post(url,ctx.params,config)
         // return axios.get(url,ctx)
     },
     async axios_post(url,formData,config){
         await this.load_js(cfg.js_lib.axios)
-        return axios.post(url,formData,config)
+        try{
+            return await axios.post(url,formData,config)
+        }catch(error){
+            cfg.showError(error.toString())
+        }
+        
     },
     async cache(getter,setter){
         var resp =await  Promise.resolve(getter())
@@ -31,12 +36,23 @@ export var network ={
             return resp
         }
     },
-    async uploadFile(url,file_src){
+    async uploadFile(url,file_src,{file_name='default',process_handler= (progressEvent) => console.log(progressEvent.loaded)  }={} ){
         let config = {
-            headers:{'Content-Type':'multipart/form-data'}
+            headers:{'Content-Type':'multipart/form-data;charset=UTF-8'},
+            onUploadProgress: process_handler
           }; //添加请求头
           let formData = new FormData();
-          formData.append('name', file_src);
+          formData.append(file_name, file_src);
+        //   await this.load_js(cfg.js_lib.axios)
+        //   return axios({
+        //     url: url,
+        //     method: 'post',
+        //     headers: {
+        //       'Content-Type': 'multipart/form-data'
+        //     },
+        //     data: formData,
+        //   })
+        
           return  this.axios_post(url,formData,config)
     },
     director_get(director_name,kws,option){

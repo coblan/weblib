@@ -1,6 +1,7 @@
 <template>
   <div class="my-pop">
-    <van-popup :closeable="ctx.closeable"  v-model="show" @close="onClose" :get-container="getContainer" :close-on-click-overlay="true">
+    <van-popup :closeable="ctx.closeable"  :position="ctx.position"
+               v-model="show" @close="onClose" :get-container="getContainer" :close-on-click-overlay="false">
       <component :is='ctx.editor' v-bind='ctx.inn_ctx' @finish="onFinish"></component>
     </van-popup>
   </div>
@@ -49,8 +50,9 @@ export var vanPop = {
 export function pop_vue_com_vant(editor,ctx,option=null){
     var pop_ctx = {
       editor:editor,
-      width:ctx.width,
-      showClose:ctx.showClose || false,
+      width:ctx.width ||ctx.meta_width ,
+      showClose:ctx.showClose ||ctx.meta_showClose || false,
+      position:ctx.meta_position,
       inn_ctx:ctx
     }
     return append_vue_dom(vanPop,{ctx:pop_ctx},option)
