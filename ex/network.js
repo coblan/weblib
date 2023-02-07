@@ -103,7 +103,11 @@ export var network ={
                 }
                 
             }else{
-                cfg.showError(error.toString())
+                if (error.message){
+                    cfg.showError(error.message)
+                }else{
+                    cfg.showError(error.toString())
+                }
             }
             // throw error
         }
