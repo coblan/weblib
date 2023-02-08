@@ -5,19 +5,32 @@
             :label="head.label"
         >
             <template v-slot:input>
-                <div class="contry-code" v-if="head.country_code">
-                    +86
-                </div>
+<!--                <div class="contry-code" v-if="head.country_code">-->
+<!--                    +86-->
+
+<!--                </div>-->
+                <mb_select class="contry-code" v-if="head.country_code" :options="contry_options"
+                           :readonly="head.readonly"
+                           v-model="country_code"></mb_select>
                 <input class="my-input" v-model="number_value" type="text" 
                 :readonly="head.readonly"
                 :placeholder="head.placeholder || '请输入手机'">
                 
             </template>
+
         </van-field>
+      <van-popup v-model="showPicker" position="bottom">
+
+      </van-popup>
     </div>
 </template>
 <script>
+import mb_select  from "../mb_select";
+import ex from '../../ex';
     export default {
+      components:{
+        mb_select
+      },
         props:{
             head:{},
             row:{}
@@ -25,13 +38,26 @@
         data(){
             return {
                 number_value:'',
-                country_code :this.head.country_code?this.head.country_code[0]:'',
-                splitter:this.head.country_splitter || '-'
+                // country_code :this.head.country_code?this.head.country_code[0]:'',
+                country_code:'',
+                splitter:this.head.country_splitter || '-'  ,
+                showPicker :false,
             }
         },
         mounted(){
             this.update_number_from_out()
         },
+      computed:{
+          contry_options(){
+            if(this.head.country_code){
+              return ex.map(this.head.country_code,(item)=>{
+                return {value:item,label:item}
+              })
+            }else{
+              return  []
+            }
+          }
+      },
         watch:{
             number_value(nv){
                 if(this.head.country_code){
