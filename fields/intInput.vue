@@ -23,7 +23,7 @@ export default {
   },
   methods:{
     regularValue(){
-      var v = this.inn_value.replace('.','')
+      var v = this.inn_value.replaceAll(/[^\d]/g,'')
       this.inn_value =v
       this.$emit('input',v)
     },
