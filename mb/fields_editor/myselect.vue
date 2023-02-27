@@ -23,7 +23,6 @@
 
 <script>
 import ex from '../../ex';
-
     export default {
         props:{
             head:{},

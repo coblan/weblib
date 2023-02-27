@@ -2,8 +2,8 @@
   <div class="out-wrap">
     <div style="height: .6rem;width: 100%;text-align: center;font-weight: bold">验证码</div>
     <div class="my-input">
-      <input  style="flex-grow: 10;border: none;" type="text" placeholder="图形验证码" v-model="vcode">
-      <img style="max-width: 2rem" @click="update_code" :src="img_url" alt="">
+      <input style="width: 3.6rem;border: none;" type="text" placeholder="图形验证码" v-model="vcode">
+      <img style="width: 2rem" @click="update_code" :src="img_url" alt="">
     </div>
     <div style="display: flex;justify-content: center">
       <div class="my-btn" style="width: 4rem;margin: .3rem auto" @click="submit">确定</div>
@@ -58,6 +58,9 @@ export default {
   display: flex;
   border: 1px solid #c2c2c2;
   padding: .1rem;
+  position: relative;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 .out-wrap{
   width: 6rem;
@@ -76,5 +79,6 @@ export default {
   background-color: #f5900d;
   border-radius: .5rem;
   color: white;
+
 }
 </style>

@@ -99,6 +99,14 @@ export function get_validator(){
                 }
             }
 
+        },
+        isInt(msg){
+            return function (value){
+                var jj = /^\d+$/.exec(value)
+                if(!jj){
+                    return msg
+                }
+            }
         }
     }
 

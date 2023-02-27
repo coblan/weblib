@@ -28,7 +28,7 @@ export default {
       row:{},
       error:{},
       labelWidth:{
-        default:"0"
+        // default:"0"
       }
     } ,
   data(){
@@ -39,6 +39,21 @@ export default {
   computed:{
     elForm(){
       return this.$refs.innForm
+    },
+    proxy(){
+      // 代理到下级组件
+      var self = this
+      return new Proxy(this.$refs.innForm,{
+        get: function(obj, prop) {
+          if(prop in self){
+            return  self[prop]
+          }else if(prop in obj){
+            return  obj[prop]
+          }else if(obj.proxy){
+            return  obj.proxy[prop]
+          }
+        }
+      })
     },
     normed_heads(){
       return ex.filter(this.heads,head=>{
