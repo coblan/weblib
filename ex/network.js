@@ -518,38 +518,48 @@ export var network ={
             tag.click();
         };
     },
-    uploadfile({url,accept}={}){
-        this.__upload_url =url
+    selectFile({accept}={}){
         return new Promise((resolve,reject)=>{
-            ex.__on_filechange=function(event){
-                let new_selected_files = event.target.files
-                var up_url = ex.__upload_url || '/d/upload?path=general_upload&split=date'
-                cfg.show_load()
-                ex.uploads(new_selected_files,up_url,function(url_list){
-                    cfg.hide_load()
-                    $('#__director-upload-file-input').val('')
-                    resolve(url_list)
-                })
-            }
+            if(!window._director_uploadfile_input) {
+                window._director_uploadfile_input = true
 
-            if(!window._director_uploadfile_input){
-                $('body').append('<input type="file" id="__director-upload-file-input" style="display: none" >')
-                $('#__director-upload-file-input').change(function(event){
-                    ex.__on_filechange(event)
-                })
-                window._director_uploadfile_input=true
-                if(accept){
-                    $('#__director-upload-file-input').attr('accept',accept)
-                }
-                $('#__director-upload-file-input').click()
-            }else{
-                if(accept){
-                    $('#__director-upload-file-input').attr('accept',accept)
-                }
-                $('#__director-upload-file-input').click()
+                var input = document.createElement("input");
+                input.type = 'file'
+                input.id = '__director-upload-file-input'
+                input.style = 'display: none'
+                document.body.appendChild(input)
+            }else {
+                var input = document.querySelector('#__director-upload-file-input')
             }
+            if(accept){
+                input.accept = accept
+            }
+            input.value=''
+            input.onchange = function(event){
+                // this.__on_filechange(event)
+                resolve(event.target.files)
+            }
+            input.click()
+                // $('#__director-upload-file-input').click()
 
         })
+    },
+   async  uploadfile({url,accept}={}){
+        // TODO 这个函数是从director继承过来的，分拆出了this.selectFile函数，但是后面上传逻辑还未落实
+        this.__upload_url =url
+        var new_selected_files = await  this.selectFile({accept})
+        var up_url = this.__upload_url || '/d/upload?path=general_upload&split=date'
+        cfg.show_load()
+        this.uploads(new_selected_files,up_url,function(url_list){
+            cfg.hide_load()
+            var input = document.querySelector('#__director-upload-file-input')
+            // $('#__director-upload-file-input').val('')
+            input.value =''
+            resolve(url_list)
+        })
+
+
+
     },
     refresh_row(row){
         return ex.director_call(row._director_name,{pk:row.pk}).then(resp=>{
