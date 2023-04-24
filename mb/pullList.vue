@@ -65,7 +65,8 @@ export default {
         autoload:{
             default:true
         },
-        getRowOption:{
+
+        option:{
 
         }
     },
