@@ -65,6 +65,7 @@ export default {
         autoload:{
             default:true
         },
+        option:{
 
         option:{
 
@@ -118,7 +119,7 @@ export default {
                return
            }
             this.page_index+=1
-            var rows = await this.getRows(this.page_index,this.pageSize,this.getRowOption)
+            var rows = await this.getRows(this.page_index,this.pageSize,this.option)
             // this.rows.push(...rows)
             this.value.push(...rows)
 
@@ -134,7 +135,7 @@ export default {
         async onRefresh(){
             this.page_index = 1
             this.finished=false
-            var rows = await this.getRows(this.page_index,this.pageSize,this.getRowOption)
+            var rows = await this.getRows(this.page_index,this.pageSize,this.option)
 
             // this.$emit('update:rows',rows)
             this.$emit('input',rows)
