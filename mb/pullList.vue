@@ -48,123 +48,119 @@ export default {
     components:{
         scrollLoadList,
     },
-    props:{
-        // pageIndex:{
-        //     default:1
-        // },
-        pageSize:{
-            default:10
-        },
-        getRows:{
+    props: {
+      // pageIndex:{
+      //     default:1
+      // },
+      pageSize: {
+        default: 10
+      },
+      getRows: {},
+      value: {},
+      // rows:{},
+      finishedText: {
+        default: '没有更多了'
+      },
+      autoload: {
+        default: true
+      },
+      option: {
 
-        },
-        value:{},
-        // rows:{},
-        finishedText:{
-            default:'没有更多了'
-        },
-        autoload:{
-            default:true
-        },
-        option:{
-
-        option:{
-
-        }
-    },
-    data(){
+        option: {}
+      },
+      data() {
         return {
-            scroll_top:0,
-            page_index:0,
-            freshing:false,
-            loading:false,
-            finished:false,
-            scrollOptions: {
-                /* lock x-direction when scrolling horizontally and  vertically at the same time */
-                directionLockThreshold: 0,
-                click:true,
-                pullDownRefresh:{
-                    txt:'刷新成功!',
-                },
-                pullUpLoad:{
-                    txt:{ more: '', noMore: this.finishedText }
-                },
-
+          scroll_top: 0,
+          page_index: 0,
+          freshing: false,
+          loading: false,
+          finished: false,
+          scrollOptions: {
+            /* lock x-direction when scrolling horizontally and  vertically at the same time */
+            directionLockThreshold: 0,
+            click: true,
+            pullDownRefresh: {
+              txt: '刷新成功!',
             },
+            pullUpLoad: {
+              txt: {more: '', noMore: this.finishedText}
+            },
+
+          },
         }
-    },
-    mounted(){
+      },
+      mounted() {
         // setInterval(() => {
         //     console.log( this.$refs.vanlist.check() )
         // }, 1000);
-        if(this.autoload){
-            this.$nextTick(()=>{
-                this.onRefresh()
-            })
+        if (this.autoload) {
+          this.$nextTick(() => {
+            this.onRefresh()
+          })
         }
-        
-        
-    },
-    methods:{
-        
-      search(){
-        this.onRefresh()
+
+
       },
-        check(){
-            this.$refs.vanlist.check()
+      methods: {
+
+        search() {
+          this.onRefresh()
+        },
+        check() {
+          this.$refs.vanlist.check()
         },
 
-        async onLoad(){
-           if(this.pageSize*this.page_index > this.value.length){
-               // 防止无畏的加载页面
-               return
-           }
-            this.page_index+=1
-            var rows = await this.getRows(this.page_index,this.pageSize,this.option)
-            // this.rows.push(...rows)
-            this.value.push(...rows)
+        async onLoad() {
+          if (this.pageSize * this.page_index > this.value.length) {
+            // 防止无畏的加载页面
+            return
+          }
+          this.page_index += 1
+          var rows = await this.getRows(this.page_index, this.pageSize, this.option)
+          // this.rows.push(...rows)
+          this.value.push(...rows)
 
-            // Vue.nextTick(()=>{
-                if(rows.length < this.pageSize){
-                    this.finish()
-                }else{
-                    this.loadOver()
-                }
-            // })
-            
+          // Vue.nextTick(()=>{
+          if (rows.length < this.pageSize) {
+            this.finish()
+          } else {
+            this.loadOver()
+          }
+          // })
+
         },
-        async onRefresh(){
-            this.page_index = 1
-            this.finished=false
-            var rows = await this.getRows(this.page_index,this.pageSize,this.option)
+        async onRefresh() {
+          this.page_index = 1
+          this.finished = false
+          var rows = await this.getRows(this.page_index, this.pageSize, this.option)
 
-            // this.$emit('update:rows',rows)
-            this.$emit('input',rows)
-            // Vue.nextTick(()=>{
-            if(rows.length < this.pageSize){
-                this.finish()
-            }else{
-                this.loadOver()
-            }
-            if(!this.finish){
-                this.check()
-            }
-           
-            // })
+          // this.$emit('update:rows',rows)
+          this.$emit('input', rows)
+          // Vue.nextTick(()=>{
+          if (rows.length < this.pageSize) {
+            this.finish()
+          } else {
+            this.loadOver()
+          }
+          if (!this.finish) {
+            this.check()
+          }
+
+          // })
         },
 
 
-        loadOver(){
-            this.freshing=false
-            this.loading=false
-            this.freshing =false
-            
+        loadOver() {
+          this.freshing = false
+          this.loading = false
+          this.freshing = false
+
         },
-        finish(){
-            this.finished = true
-            this.loading=false
-            this.freshing =false
-            
+        finish() {
+          this.finished = true
+          this.loading = false
+          this.freshing = false
+
         },
         // onLoad(){
         //     // this.$emit('update:pageIndex',this.pageIndex)
@@ -177,6 +173,7 @@ export default {
         //     // this.$emit('refresh')
         //     this.on_refresh()
         // }
+      }
     }
 }
 </script>
