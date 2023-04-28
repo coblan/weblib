@@ -14,8 +14,8 @@
                                 here is content
 
                         </slot>
-                
-            
+
+
                 </van-list> -->
               <div v-show="finished && value.length==0">
                 <slot name="empty">
