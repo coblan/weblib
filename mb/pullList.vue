@@ -68,6 +68,8 @@ export default {
         },
         option:{
 
+        option:{
+
         }
     },
     data(){
