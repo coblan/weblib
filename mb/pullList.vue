@@ -17,13 +17,14 @@
                 
             
                 </van-list> -->
-              <div v-show="finished && value.length==0">
-                <slot name="empty">
-                  <div style="height: 100px;display: flex;width: 100%;justify-content: center;align-items: center">没有数据</div>
-                </slot>
-              </div>
+<!--            不能判断length来显示这个empty部分，因为content部分可能包含有tab头等等特殊内容，会被误隐藏-->
+<!--              <div v-show="finished && value.length==0">-->
+<!--                <slot name="empty">-->
+<!--                  <div style="height: 100px;display: flex;width: 100%;justify-content: center;align-items: center">没有数据</div>-->
+<!--                </slot>-->
+<!--              </div>-->
+
                 <scrollLoadList
-                    v-show="!finished || value.length !=0"
                     style="height: 100%;"
                     ref='vanlist'
                     v-model="loading"
