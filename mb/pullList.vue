@@ -64,9 +64,7 @@ export default {
       autoload: {
         default: true
       },
-      option: {
-
-        option: {}
+      option: {},
       },
       data() {
         return {
@@ -174,7 +172,7 @@ export default {
         //     this.on_refresh()
         // }
       }
-    }
+
 }
 </script>
 <style scoped lang="scss">
