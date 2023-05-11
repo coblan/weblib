@@ -17,7 +17,8 @@ export default {
       this.inn_value = nv
     },
     inn_value(nv){
-      var v = nv.replace('.','')
+      var nv_str = nv.toString()
+      var v = nv_str.replace('.','')
       this.$emit('input',v)
     }
   },
