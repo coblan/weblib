@@ -1,6 +1,7 @@
 <template>
   <div class="qrcode-picture">
-    <div class="mycode" style="height: 100%;width: 100%"></div>
+    <div class="mycode" style="height: 100%;width: 100%">
+   </div>
   </div>
 
 </template>
@@ -25,10 +26,14 @@ export default {
     updatePicture(){
       var self = this
       var dom = this.$el.querySelector('.mycode')
+      var width = dom.clientWidth
+      var height =dom.clientHeight
       var qrcode = new QRCode( dom , {
         text: self.code,
-        width: 128,
-        height: 128,
+        // width: 128,
+        // height: 128,
+        width: width,
+        height: height,
         colorDark : "#000000",
         colorLight : "#ffffff",
         correctLevel : QRCode.CorrectLevel.H
