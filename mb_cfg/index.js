@@ -26,9 +26,9 @@ export default {
 
         return resp
     },
-    showMsg(msg){
+    showMsg(msg,{title,confirmButtonText='确定',}={}){
         // return  MessageBox.alert(msg)
-        return Dialog({ message: msg });
+        return Dialog({ message: msg, confirmButtonText,title});
     },
     showError(msg){
         // return  MessageBox.alert(msg)
