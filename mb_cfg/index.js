@@ -36,11 +36,11 @@ export default {
             message: msg,
           })
     },
-    confirm(msg){
+    confirm(msg,{confirmButtonText='确定'}={}){
         // return MessageBox.confirm(msg)
         return Dialog.confirm({
             message: msg,
-            
+            confirmButtonText:confirmButtonText,
           })
     },
     show_load(msg){
