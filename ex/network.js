@@ -7,19 +7,30 @@ import {FreePromise} from 'weblib/ex/promise'
 
 export var network ={
     async axios_get(url,  ctx){
-        await this.load_js(cfg.js_lib.axios)
-        const config = {
-            headers:{
-              realtype:'json_get'
-            }
-          };
-        // 因为有时请求的参数过于复杂，使用原始的get请求会出问题，所以使用了post+header来模拟get请求。
-        // 后台识别到realtype=='json_get'时，就会使用fast_director_view去调用director_view。
-          return axios.post(url,ctx.params,config)
+        if(cfg.js_lib){  // 判断是否在后台环境
+            await this.load_js(cfg.js_lib.axios)
+            const config = {
+                headers:{
+                  realtype:'json_get'
+                }
+              };
+              
+            // 因为有时请求的参数过于复杂，使用原始的get请求会出问题，所以使用了post+header来模拟get请求。
+            // 后台识别到realtype=='json_get'时，就会使用fast_director_view去调用director_view。
+              return axios.post(url,ctx.params,config)
+        }
+        else{
+            return axios.get(url,ctx.params)
+        }
+       
+      
         // return axios.get(url,ctx)
     },
     async axios_post(url,formData,config){
-        await this.load_js(cfg.js_lib.axios)
+        if(cfg.js_lib){
+            await this.load_js(cfg.js_lib.axios)
+        }
+       
         try{
             return await axios.post(url,formData,config)
         }catch(error){
@@ -56,7 +67,6 @@ export var network ={
           return  this.axios_post(url,formData,config)
     },
     director_get(director_name,kws,option){
-        debugger
         if(option){
             option.get=true
         }else{
