@@ -20,7 +20,14 @@ export var network ={
               return axios.post(url,ctx.params,config)
         }
         else{
-            return axios.get(url,ctx.params)
+            // axios.get不支持参数，所以这里自动给他补上
+            if(ctx.params){
+                var real_url = this.appendSearch(url,ctx.params)
+            }else{
+                var real_url = url
+            }
+            // return axios.get(url,ctx.params)
+            return axios.get(real_url)
         }
        
       

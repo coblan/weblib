@@ -30,9 +30,11 @@ import { Loading } from 'element-ui';
 //             }
 //         }
 //     });
-
+import cdn from '../cdn'
 var cfg={
     // bus:new Vue(),
+    run_context:'backend',
+    js_lib:cdn,
     layer_index_stack:[],
     env:{
         width: window.innerWidth,  //$(window).width(),
