@@ -88,11 +88,14 @@ export default {
                 // effect: 'fade',
                 loop: true,
                 // autoplay:true,
+                // autoplay:{
+                //     delay:100,
+                // },
                 autoplay: {
-                    delay:  0, //this.delay ,
+                    delay: this.delay ,
                     disableOnInteraction: false,
                 },
-                pauseOnMouseEnter:true,
+                // pauseOnMouseEnter:true,
                 direction:this.direction,
                 pagination: {
                     el: this.$el.querySelector('.swiper-pagination'),
