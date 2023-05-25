@@ -173,10 +173,10 @@ export var network ={
     // },
     post:function(url,data,callback){
         if(callback){
-            ex._post(url,data,callback)
+            this._post(url,data,callback)
         }else{
             var p = new Promise(function(resolve,reject){
-                ex._post(url,data,function(resp){
+                this._post(url,data,function(resp){
                     resolve(resp)
                 },(rt)=>{
                     reject(rt)
@@ -258,7 +258,7 @@ export var network ={
     },
     load_js:function(src,success){
         if(success){
-            return ex._load_js(src,success)
+            return this._load_js(src,success)
         }else{
             var p = new Promise((resolve,reject)=>{
                 this._load_js(src,function(){
@@ -303,8 +303,8 @@ export var network ={
     load_js_list:function(js_list,success){
         return new Promise( (resolve,reject)=>{
             var length = js_list.length
-            ex.each(js_list,function(js){
-                ex.load_js(js,function(){
+            this.each(js_list,function(js){
+                this.load_js(js,function(){
                     length -=1
                     if(length ==0){
                         if(success){
@@ -334,7 +334,7 @@ export var network ={
     },
     append_css:function(style){
         if(!window.md5){
-            var pro = ex.load_js('https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js')
+            var pro = this.load_js('https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js')
         }else{
             var pro = 1
         }
@@ -479,7 +479,7 @@ export var network ={
                   if(kws == undefined){
                        kws = {}
                    }
-                 return ex.director_call('d.director_element_call',{director_name:director_name,attr_name:methed,kws:kws})
+                 return this.director_call('d.director_element_call',{director_name:director_name,attr_name:methed,kws:kws})
             }
         }
     },
