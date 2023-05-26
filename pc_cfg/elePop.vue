@@ -88,6 +88,11 @@ var  elePop = {
 import  {append_vue_dom} from 'weblib/pc_cfg/appendVueDom'
 
 export function pop_vue_com_ele(editor,ctx){
+    /*
+    ctx.showClose:false,
+    ctx.width:120px,
+    
+     */
     var pop_ctx = {
         editor:editor,
         width:ctx.width,

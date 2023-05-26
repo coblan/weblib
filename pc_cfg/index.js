@@ -1,6 +1,6 @@
 
 
-import {pop_layer} from './poplayer'
+import {pop_layer,layer_vue_com} from './poplayer'
 
 import ex from 'weblib/ex'
 // import cdn from 'weblib/cdn.js'
@@ -10,7 +10,7 @@ import { MessageBox } from 'element-ui';
 
 import  {append_vue_dom} from 'weblib/pc_cfg/appendVueDom'
 import Toast from '../pc/toast.vue'
-
+import {pop_vue_com_ele} from './elePop.vue'
 
 // 为了使用layer暂时引入jquery
 // ex.load_js(cdn.jquery)
@@ -158,24 +158,25 @@ var cfg={
             layer.close(winindex)
         }
     },
-    pop_vue_com:function(editor,ctx,option){
-        return new Promise(function(resolve,reject){
-            var callback = function(e){
-                close_fun()
-                // 用户点击layer的叉叉退出弹出框时,e==__end_by_user
-                if(e != '__end_by_user'){
-                    resolve(e)
-                }else{
-                    reject()
-                }
-            }
-            ctx.ops_loc = ctx.ops_loc || 'bottom'
-            var winindex = pop_layer(ctx,editor,callback,option)
-            var close_fun = function (){
-                layer.close(winindex)
-            }
-        })
-    },
+    pop_vue_com:pop_vue_com_ele,
+    // pop_vue_com:function(editor,ctx,option){
+    //     return new Promise(function(resolve,reject){
+    //         var callback = function(e){
+    //             close_fun()
+    //             // 用户点击layer的叉叉退出弹出框时,e==__end_by_user
+    //             if(e != '__end_by_user'){
+    //                 resolve(e)
+    //             }else{
+    //                 reject()
+    //             }
+    //         }
+    //         ctx.ops_loc = ctx.ops_loc || 'bottom'
+    //         var winindex = layer_vue_com(ctx,editor,callback,option)
+    //         var close_fun = function (){
+    //             layer.close(winindex)
+    //         }
+    //     })
+    // },
     close_win:function(index){
         if(index=='full_win'){
             history.back()

@@ -11,7 +11,7 @@ export async function  layer_vue_com(com,com_ctx,config){
 
     var layer_config = {
         type: 1,
-        area: config.area,// ['800px', '500px'],
+        area: config.area ||  get_proper_size(),// ['800px', '500px'],
         title: com_ctx.title,
         zIndex:1000,
         // resize:true,
@@ -41,7 +41,7 @@ export async function  layer_vue_com(com,com_ctx,config){
         el:'#fields-pop-'+pop_id,
         data:{
             com_ctx:com_ctx,
-            component_name:component_name,
+            component_name:com,
         },
         render(createElement){
             return createElement(this.component_name,{

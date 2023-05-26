@@ -25,6 +25,7 @@ if(jsdelivr_over){
         wowjs:'https://lib.baomitu.com/wow/1.1.2/wow.min.js',
         layer:'https://lib.baomitu.com/layer/3.5.1/layer.min.js',
         axios:"https://lib.baomitu.com/axios/0.26.1/axios.min.js",
+        jquery:'https://s1.pstatp.com/cdn/jquery/3.4.1/jquery.min.js',
 
         // swiper_js :'https://lib.baomitu.com/Swiper/6.8.4/swiper-bundle.min.js',
         // swiper_css:'https://lib.baomitu.com/Swiper/6.8.4/swiper-bundle.min.js'
