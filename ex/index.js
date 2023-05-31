@@ -16,7 +16,7 @@ import math from "./math";
 import local from "./local";
 import file from './file'
 // import animate from './animate'
-var dayjs = require('dayjs')
+var dayjs =  require('./dayjs.min.js') //require('dayjs')
 
 var ex ={
     dayjs:dayjs,

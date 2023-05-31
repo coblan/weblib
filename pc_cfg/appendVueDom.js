@@ -51,8 +51,10 @@ if(option){
             },
             methods:{
                 on_finish:function(e){
-                    resolve(e)
                     document.getElementById('vue-dom-'+pop_id).remove();
+                    setTimeout(()=>{
+                        resolve(e)
+                    },100)
                 }
             }
         })
