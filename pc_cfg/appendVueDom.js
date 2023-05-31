@@ -1,6 +1,10 @@
 import Vue from 'vue'
 // import cfg from "../mb_cfg";
 export  function append_vue_dom (editor,ctx,option={}){
+    /*
+    * option.close  我猜测是  传一个参数进来，挂载close函数，从而可以在外部主动关闭弹窗。
+    *
+    * */
     // row,head ->//model_name,relat_field
     var pop_id =new Date().getTime()
 
@@ -22,7 +26,6 @@ if(option){
         if(dom){
            dom .remove();
         }
-       
     }
 }
 
@@ -39,20 +42,21 @@ if(option){
                 return createElement(this.component_name,{
                     attrs:{
                         id:'vue-dom-'+pop_id,
+                        ref:'origin_editor',
                         ...this.ctx,
                         // ctx:this.ctx
                     },
-                        on:{
-                            finish:this.on_finish
-                        }
+                    on:{
+                        finish:this.on_finish
+                    }
                 }
     
                     )
             },
             methods:{
                 on_finish:function(e){
-                    document.getElementById('vue-dom-'+pop_id).remove();
                     setTimeout(()=>{
+                        document.getElementById('vue-dom-'+pop_id).remove();
                         resolve(e)
                     },100)
                 }

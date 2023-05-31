@@ -1,9 +1,9 @@
 <template>
   <div class="my-pop">
-<!--    <van-popup :closeable="ctx.closeable"  :position="ctx.position"-->
-<!--               v-model="show" @close="onClose" :get-container="getContainer" :close-on-click-overlay="false">-->
+    <van-popup :closeable="ctx.closeable"  :position="ctx.position"
+               v-model="show" @close="onClose" :get-container="getContainer" :close-on-click-overlay="false">
       <component :is='ctx.editor' v-bind='ctx.inn_ctx' @finish="onFinish"></component>
-<!--    </van-popup>-->
+    </van-popup>
   </div>
 
 
@@ -28,6 +28,7 @@ export var vanPop = {
     onClose(){
       if(!this.hasfinish){
         this.hasfinish=true
+        this.show=false
         this.$emit('finish',)
       }
 
@@ -35,6 +36,7 @@ export var vanPop = {
     onFinish(e){
       if(!this.hasfinish){
         this.hasfinish = true
+        this.show=false
         this.$emit('finish',e)
       }
 
@@ -55,17 +57,17 @@ export function pop_vue_com_vant(editor,ctx,option=null){
       position:ctx.meta_position,
       inn_ctx:ctx
     }
-    return append_vue_dom(vanPop,{ctx:pop_ctx},option)
+    return append_vue_dom(vanPop,{ctx:pop_ctx},option,)
 }
 export default  vanPop;
 </script>
 <style scoped lang="scss">
 .my-pop{
-  
-  position: fixed;
-  transform: translate(-50%,-50%);
-  left: 50%;
-  top:50%;
+
+  //position: fixed;
+  //transform: translate(-50%,-50%);
+  //left: 50%;
+  //top:50%;
 
   ::v-deep{
     .van-popup--center{
