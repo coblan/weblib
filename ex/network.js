@@ -7,19 +7,37 @@ import {FreePromise} from 'weblib/ex/promise'
 
 export var network ={
     async axios_get(url,  ctx){
-        await this.load_js(cfg.js_lib.axios)
-        const config = {
-            headers:{
-              realtype:'json_get'
+        if(cfg.js_lib){  // 判断是否在后台环境
+            await this.load_js(cfg.js_lib.axios)
+            const config = {
+                headers:{
+                  realtype:'json_get'
+                }
+              };
+              
+            // 因为有时请求的参数过于复杂，使用原始的get请求会出问题，所以使用了post+header来模拟get请求。
+            // 后台识别到realtype=='json_get'时，就会使用fast_director_view去调用director_view。
+              return axios.post(url,ctx.params,config)
+        }
+        else{
+            // axios.get不支持参数，所以这里自动给他补上
+            if(ctx.params){
+                var real_url = this.appendSearch(url,ctx.params)
+            }else{
+                var real_url = url
             }
-          };
-        // 因为有时请求的参数过于复杂，使用原始的get请求会出问题，所以使用了post+header来模拟get请求。
-        // 后台识别到realtype=='json_get'时，就会使用fast_director_view去调用director_view。
-          return axios.post(url,ctx.params,config)
+            // return axios.get(url,ctx.params)
+            return axios.get(real_url)
+        }
+       
+      
         // return axios.get(url,ctx)
     },
     async axios_post(url,formData,config){
-        await this.load_js(cfg.js_lib.axios)
+        if(cfg.js_lib){
+            await this.load_js(cfg.js_lib.axios)
+        }
+       
         try{
             return await axios.post(url,formData,config)
         }catch(error){
@@ -56,7 +74,6 @@ export var network ={
           return  this.axios_post(url,formData,config)
     },
     director_get(director_name,kws,option){
-        debugger
         if(option){
             option.get=true
         }else{
@@ -156,10 +173,10 @@ export var network ={
     // },
     post:function(url,data,callback){
         if(callback){
-            ex._post(url,data,callback)
+            this._post(url,data,callback)
         }else{
             var p = new Promise(function(resolve,reject){
-                ex._post(url,data,function(resp){
+                this._post(url,data,function(resp){
                     resolve(resp)
                 },(rt)=>{
                     reject(rt)
@@ -241,7 +258,7 @@ export var network ={
     },
     load_js:function(src,success){
         if(success){
-            return ex._load_js(src,success)
+            return this._load_js(src,success)
         }else{
             var p = new Promise((resolve,reject)=>{
                 this._load_js(src,function(){
@@ -286,8 +303,8 @@ export var network ={
     load_js_list:function(js_list,success){
         return new Promise( (resolve,reject)=>{
             var length = js_list.length
-            ex.each(js_list,function(js){
-                ex.load_js(js,function(){
+            this.each(js_list,function(js){
+                this.load_js(js,function(){
                     length -=1
                     if(length ==0){
                         if(success){
@@ -317,7 +334,7 @@ export var network ={
     },
     append_css:function(style){
         if(!window.md5){
-            var pro = ex.load_js('https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js')
+            var pro = this.load_js('https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js')
         }else{
             var pro = 1
         }
@@ -462,7 +479,7 @@ export var network ={
                   if(kws == undefined){
                        kws = {}
                    }
-                 return ex.director_call('d.director_element_call',{director_name:director_name,attr_name:methed,kws:kws})
+                 return this.director_call('d.director_element_call',{director_name:director_name,attr_name:methed,kws:kws})
             }
         }
     },

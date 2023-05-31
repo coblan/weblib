@@ -51,6 +51,9 @@ export default {
         delay:{
             default:3000,
         },
+        speed:{
+            default:3000,
+        },
       direction: {
           default:"horizontal",//"vertical"
       },
@@ -74,20 +77,25 @@ export default {
     methods:{
         async update(){
             ex.load_css(cfg.js_lib.swiper_css)
-            await ex.load_js(cfg.js_lib.swiper)
+            await ex.load_js(cfg.js_lib.swiper_js)
             var self =this
-            var swiper = new Swiper(this.$el.querySelector('.swiper-container'), {
+            var mySwiper = new Swiper(this.$el.querySelector('.swiper-container'), {
                 slidesPerView: this.slidesPerView ,
                 freeMode: true,
-                speed:3000,
+                speed:this.speed,
                 spaceBetween: 20,
                  centeredSlides: false,
                 // effect: 'fade',
                 loop: true,
+                // autoplay:true,
+                // autoplay:{
+                //     delay:100,
+                // },
                 autoplay: {
-                    delay:  0, //this.delay ,
+                    delay: this.delay ,
                     disableOnInteraction: false,
                 },
+                // pauseOnMouseEnter:true,
                 direction:this.direction,
                 pagination: {
                     el: this.$el.querySelector('.swiper-pagination'),
@@ -106,6 +114,27 @@ export default {
                 //     },
                 // },
             });
+
+            this.mySwiper = mySwiper
+
+            // mySwiper.el.onmouseover = function(){
+            //     mySwiper.autoplay.stop();
+            //     console.log('sotp....')
+            // }
+            // mySwiper.el.onmouseout = function(){
+            //     mySwiper.autoplay.start();
+            //     console.log('start....')
+            // }
+        },
+        stop(){
+            if(this.mySwiper){
+                this.mySwiper.autoplay.stop()
+            }
+        },
+        play(){
+            if(this.mySwiper){
+                this.mySwiper.autoplay.start()
+            }
         },
         on_click(item){
 

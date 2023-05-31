@@ -6,6 +6,13 @@
   bottom: 0;
 }
 
+.ab-middle{
+  position: absolute;
+  left: 50%;
+  top:50%;
+  transform: translate(-50%,-50%);
+}
+
 .beauty-scorll-bar{
     /* 滚动槽 */
   &::-webkit-scrollbar {

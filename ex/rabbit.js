@@ -1,6 +1,6 @@
 //rabbit={{ rabbit | jsonify }}
 // import cdn from 'weblib/cdn.js'
-
+import  {collection} from  './collection'
 export var rabbit={
     /*
      ctx={
@@ -32,7 +32,7 @@ export var rabbit={
     },
 
     stompInit(ctx){
-        debugger
+        var self = this
         var stompObj ={
             _stomp_client:null,
             // _lstool_list:[],
@@ -93,13 +93,13 @@ export var rabbit={
             },
             oneListen(url,callback){
                 let ls =[...this._lstool.needListen,...this._lstool.listened ]  
-                if(!ex.isin(url,ls)){
+                if(!self.isin(url,ls)){
                     this._lstool.addListen(url,callback)
                 }
             },
             replaceListen(url,callback){
                 let ls =[...this._lstool.needListen,...this._lstool.listened ]  
-                if(ex.isin(url,ls)){
+                if(self.isin(url,ls)){
                     this._lstool.unListen(url)
                 }
                 this._lstool.addListen(url,callback)
@@ -107,7 +107,7 @@ export var rabbit={
             regStopListen(regexp){
                 let ls =[...this._lstool.needListen,...this._lstool.listened ] 
                 let reg = new RegExp(regexp) 
-                ex.each(ls,url=>{
+                self.each(ls,url=>{
                     if(reg.exec(url)){
                         this._lstool.unListen(url)
                     }
@@ -127,7 +127,7 @@ export var rabbit={
             }
         }
         stompObj._lstool=new ListenTool(stompObj)
-        ex.load_js(cfg.js_lib.stompjs, ()=> {
+        this.load_js(cfg.js_lib.stompjs, ()=> {
             stompObj.init()
         })
         return stompObj
@@ -135,6 +135,7 @@ export var rabbit={
 
 
 }
+
 
 
 class ListenTool {
@@ -154,7 +155,7 @@ class ListenTool {
             this.callbacks[ele].push(callback)
         }
 
-        if (ex.isin(ele, this.listened) || ex.isin(ele, this.needListen)) {
+        if (collection.isin(ele, this.listened) || collection.isin(ele, this.needListen)) {
             this.listened.push(ele);
         } else {
             this.needListen.push(ele);
@@ -170,7 +171,7 @@ class ListenTool {
             this.listened.push(ele);
             if (!this.listenedSocket[ele]) {
                 this.listenedSocket[ele] = this.par._stomp_client.subscribe(ele, (resp)=>{
-                    ex.each(this.callbacks[ele],callback=>{
+                    collection.each(this.callbacks[ele],callback=>{
                         callback(resp)
                     })
                 });  
@@ -184,8 +185,8 @@ class ListenTool {
             delete this.listenedSocket[ele]
         }
         delete this.callbacks[ele]
-        ex.remove(this.listened,ele)
-        ex.remove(this.needListen,ele)
+        collection.remove(this.listened,ele)
+        collection.remove(this.needListen,ele)
     
        
         // 现在直接停止该项url的监听

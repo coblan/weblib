@@ -16,7 +16,10 @@ import math from "./math";
 import local from "./local";
 import file from './file'
 // import animate from './animate'
+var dayjs = require('dayjs')
+
 var ex ={
+    dayjs:dayjs,
     _current_index:1,
     getIndex(){
         this._current_index +=1

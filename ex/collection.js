@@ -234,6 +234,42 @@ export var collection={
             }
         })
     },
+    _find_method(obj_or_func,now_obj){
+        if(typeof(obj_or_func)=='function'){
+            var func=obj_or_func
+            var match=func(now_obj)
+        }else{
+            var obj=obj_or_func
+            var match=true
+            for(var key in obj){
+                if(key.startsWith('_')){
+                    continue
+                }
+                if (obj[key] !== now_obj[key]){
+                    match =false
+                    break
+                }
+            }
+        }
+        return match
+    },
+    walk_findone:function(array,obj_or_func,{children_key="children"}={}){
+        var key = children_key 
+        for(var i=0 ;i<array.length;i++){
+            var item = array[i]
+            console.log(item)
+            if(this._find_method(obj_or_func,item)){
+                return item
+            }
+            if(item[children_key]){
+                console.log(item[children_key])
+                var child_item = this.walk_findone(item[children_key],obj_or_func,{children_key:children_key})
+                if(child_item){
+                    return child_item
+                }
+            }
+        }
+    },
     sample(array){
         return array[Math.floor(Math.random() * array.length)]
     },
