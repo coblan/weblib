@@ -23,7 +23,12 @@ export default {
 
         var resp = await pop_vue_com_vant(com,ctx,option)
         history.back()
-
+        // history.back造成后续 vant confirm之类的窗口 弹不出来。这里要等待几秒返回 才行。
+         var p = new ex.FreePromise()
+         setTimeout(()=>{
+           p.resolve()
+         },10)
+         await p.promise
         return resp
     },
     showMsg(msg,{title,confirmButtonText='确定',}={}){
