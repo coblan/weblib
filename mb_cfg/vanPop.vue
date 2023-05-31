@@ -1,9 +1,9 @@
 <template>
   <div class="my-pop">
-    <van-popup :closeable="ctx.closeable"  :position="ctx.position"
-               v-model="show" @close="onClose" :get-container="getContainer" :close-on-click-overlay="false">
+<!--    <van-popup :closeable="ctx.closeable"  :position="ctx.position"-->
+<!--               v-model="show" @close="onClose" :get-container="getContainer" :close-on-click-overlay="false">-->
       <component :is='ctx.editor' v-bind='ctx.inn_ctx' @finish="onFinish"></component>
-    </van-popup>
+<!--    </van-popup>-->
   </div>
 
 
@@ -61,6 +61,11 @@ export default  vanPop;
 </script>
 <style scoped lang="scss">
 .my-pop{
+  position: fixed;
+  transform: translate(-50%,-50%);
+  left: 50%;
+  top:50%;
+
   ::v-deep{
     .van-popup--center{
       background-color: transparent;
