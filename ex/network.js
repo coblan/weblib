@@ -3,6 +3,7 @@
 // import cfg from '../pc_cfg';
 // import cfg from '../pc_cfg';
 // import axios from 'axios';
+import cdn from '../cdn.js'
 import {FreePromise} from 'weblib/ex/promise'
 
 export var network ={
@@ -368,98 +369,6 @@ export var network ={
         })
         return p
     },
-    // director_call:function(director_name,kws,callback){
-    //     //var post_data=[{fun:"director_call",director_name:director_name,kws:kws}]
-    //     if(callback && typeof callback=='function'){
-    //             if(ex.isEmpty(kws)){
-    //                 var post_data = {}
-    //             }else{
-    //                 var post_data= JSON.stringify(kws)
-    //             }
-    //         ex.post('/dapi/'+director_name,post_data,function(resp){
-    //             if(resp.success){
-    //                 callback( resp.data )
-    //             }
-    //         })
-    //     }else{
-    //         var worker = new DirectorCall(director_name,kws,callback)
-    //         return worker.run()
-    //     }
-    // },
-    //director_call:function(director_name,kws,callback){
-    //    //var post_data=[{fun:"director_call",director_name:director_name,kws:kws}]
-    //    if(ex.isEmpty(kws)){
-    //        var post_data = {}
-    //    }else{
-    //        var post_data= JSON.stringify(kws)
-    //    }
-    //    if (callback && typeof callback =='object'){
-    //        var option = callback
-    //    }else{
-    //        var option ={}
-    //    }
-    //    if(option.cache ){
-    //        window._director_cache =  window._director_cache || {}
-    //        var key = md5(director_name+JSON.stringify(kws))
-    //
-    //        if(window._director_cache[key]){
-    //            var cache_value = window._director_cache[key]
-    //            if(Array.isArray( cache_value) && typeof cache_value[0] =='function' ){
-    //                // 表示前面的请求还在进行中
-    //                return new Promise((resolve,reject)=>{
-    //                    cache_value.push((resp)=>{
-    //                        resolve(resp)
-    //                    })
-    //                })
-    //            }else{
-    //                return Promise.resolve(cache_value)
-    //            }
-    //        }else {
-    //            // 第一个 请求 放个空函数，触发后面的 往 cache里面 插入 function
-    //            window._director_cache[key] = [()=>{}]
-    //        }
-    //    }
-    //    if(callback && typeof callback=='function'){
-    //        ex.post('/dapi/'+director_name,post_data,function(resp){
-    //            if(resp.success){
-    //                callback( resp.data )
-    //            }
-    //
-    //        })
-    //    }else{
-    //        var post_url = '/dapi/'+director_name
-    //        if(option.transaction != undefined){
-    //            post_url = ex.appendSearch(post_url,{transaction:option.transaction})
-    //        }
-    //
-    //        return new Promise(function(resolve,reject){
-    //         return   ex.post(post_url,post_data).then(
-    //                function(resp){
-    //                    if(resp.success) {
-    //                        if(resp._question){
-    //                            ex.eval(resp._question,{director_name:director_name,kws:kws,resolve:resolve})
-    //                        }else{
-    //                            resolve(resp.data)
-    //                            // 缓存代码
-    //                            if(option.cache ){
-    //                                var cache_value = window._director_cache[key]
-    //                                if(Array.isArray( cache_value) && typeof cache_value[0] =='function' ){
-    //                                    ex.each( window._director_cache[key],func=>{
-    //                                        func(resp.data)
-    //                                    })
-    //                                }
-    //                                window._director_cache[key] = resp.data
-    //                            }
-    //                        }
-    //                    }
-    //                }
-    //            ).catch(()=>{
-    //                 reject()
-    //            })
-    //        })
-    //    }
-    //
-    //},
     director(director_name){
         // 为了兼容性，暂时屏蔽 Proxy 版本的代码
         //let handler = {
@@ -579,8 +488,47 @@ export var network ={
 
     },
     refresh_row(row){
+        /*
+        这个应该是与direcor里面的update_row同一个功能啊。应该去掉
+         */
         return ex.director_call(row._director_name,{pk:row.pk}).then(resp=>{
             ex.vueAssign(row,resp.row)
         })
+    },
+    async getFile(url){
+        await this.load_js(cdn.axios)
+        var pro = new FreePromise()
+        axios({
+            method: 'get',
+            url: url,
+            data: {},
+            responseType: 'blob'
+        }).then(res => {
+            const { data } = res
+            const blob = new Blob([data])
+            pro.resolve(blob)
+            
+            // let disposition = decodeURI(res.headers['content-disposition'])
+            // // 从响应头中获取文件名称
+            // let fileName = disposition.substring(disposition.indexOf('fileName=') + 9, disposition.length)
+            // if ('download' in document.createElement('a')) {
+            //     // 非IE下载
+            //     const elink = document.createElement('a')
+            //     elink.download = fileName
+            //     elink.style.display = 'none'
+            //     elink.href = URL.createObjectURL(blob)
+            //     document.body.appendChild(elink)
+            //     elink.click()
+            //     URL.revokeObjectURL(elink.href) // 释放URL 对象
+            //     document.body.removeChild(elink)
+            // } else {
+            //     // IE10+下载
+            //     navigator.msSaveBlob(blob, fileName)
+            // }
+        }).catch((error) => {
+                console.log(error)
+        })
+
+        return pro.promise
     }
 }
