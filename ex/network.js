@@ -530,5 +530,27 @@ export var network ={
         })
 
         return pro.promise
+    },
+    lock_key:{},
+    async keyCache(key,fun){
+        var cachekey = `_cached_${key}`
+        if(window[cachekey]){
+            return window[cachekey]
+        }else{
+            if(!this.lock_key[cachekey]){
+                this.lock_key[cachekey] = new ex.FreePromise()
+                var rt = await fun()
+                window[cachekey] = rt
+                this.lock_key[cachekey].resolve(rt)
+                setTimeout(()=>{
+                    delete  this.lock_key[cachekey]
+                },10)
+                return rt
+            }else{
+                return  await this.lock_key[cachekey].promise
+            }
+            
+        }
+
     }
 }
