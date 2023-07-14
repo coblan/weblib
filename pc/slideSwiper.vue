@@ -60,7 +60,7 @@ import cdn from '../cdn.js'
 
 // import { ref, reactive,computed ,onMounted,getCurrentInstance } from '@vue/composition-api'
 import Vue from "vue";
-
+import ex from 'weblib/ex'
 export default {
     props:{
         showPagination:{
