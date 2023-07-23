@@ -68,4 +68,8 @@ export default {
 .stretch.image-div{
   background-size: 100% 100%;
 }
+.contain.image-div{
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 </style>
