@@ -55,13 +55,13 @@ export var network ={
             return resp
         }
     },
-    async uploadFile(url,file_src,{file_name='default',process_handler= (progressEvent) => console.log(progressEvent.loaded)  }={} ){
+    async uploadFile(url,file_src,{field_name='file', file_name='default',process_handler= (progressEvent) => console.log(progressEvent.loaded)  }={} ){
         let config = {
             headers:{'Content-Type':'multipart/form-data;charset=UTF-8'},
             onUploadProgress: process_handler
           }; //添加请求头
           let formData = new FormData();
-          formData.append(file_name, file_src);
+          formData.append(field_name, file_src,file_name);
         //   await this.load_js(cfg.js_lib.axios)
         //   return axios({
         //     url: url,
