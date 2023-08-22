@@ -393,6 +393,7 @@ export var network ={
         }
     },
     download:function(strPath){
+        //老的下载，可能有问题。使用downloadFile
             var varExt = strPath.split('.');
             //alert(varExt.length);
             if (varExt[varExt.length - 1] == "txt") {
@@ -413,6 +414,24 @@ export var network ={
             }
             return false;
     },
+     downloadFile(url, fileName) {
+        fetch(url, {
+            method: "get",
+            mode: "no-cors",
+            referrerPolicy: "no-referrer",
+        })
+            .then((res) => res.blob())
+            .then((res) => {
+                const aElement = document.createElement("a");
+                aElement.setAttribute("download", fileName);
+                const href = URL.createObjectURL(res);
+                aElement.href = href;
+                aElement.setAttribute("target", "_blank");
+                aElement.click();
+                URL.revokeObjectURL(href);
+            });
+    },
+
     downLoadImage(downloadName, url) {
         //url是dataurl ,或者 url
         var getImageDataURL = (image)=> {
