@@ -34,7 +34,7 @@ export var network ={
       
         // return axios.get(url,ctx)
     },
-    async axios_post(url,formData,config){
+    async axios_post(url,formData,config,retry=0){
         if(cfg.js_lib){
             await this.load_js(cfg.js_lib.axios)
         }
@@ -42,7 +42,14 @@ export var network ={
         try{
             return await axios.post(url,formData,config)
         }catch(error){
-            cfg.showError(error.toString())
+            if(retry <=0){
+                cfg.showError(error.toString())
+            }else{
+                var next_retry = retry-1
+                config.log(`剩余重试次数${next_retry}`)
+                return await this.axios_post(url,formData,config,next_retry)
+            }
+           
         }
         
     },
@@ -55,24 +62,15 @@ export var network ={
             return resp
         }
     },
-    async uploadFile(url,file_src,{field_name='file', file_name='default',process_handler= (progressEvent) => console.log(progressEvent.loaded)  }={} ){
+    async uploadFile(url,file_src,{field_name='file', file_name='default',retry=5,process_handler= (progressEvent) => console.log(progressEvent.loaded)  }={} ){
         let config = {
             headers:{'Content-Type':'multipart/form-data;charset=UTF-8'},
             onUploadProgress: process_handler
           }; //添加请求头
           let formData = new FormData();
           formData.append(field_name, file_src,file_name);
-        //   await this.load_js(cfg.js_lib.axios)
-        //   return axios({
-        //     url: url,
-        //     method: 'post',
-        //     headers: {
-        //       'Content-Type': 'multipart/form-data'
-        //     },
-        //     data: formData,
-        //   })
-        
-          return  this.axios_post(url,formData,config)
+          // 上传文件默认重试5次
+          return  this.axios_post(url,formData,config,retry=retry)
     },
     director_get(director_name,kws,option){
         if(option){
