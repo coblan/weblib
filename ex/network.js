@@ -40,18 +40,28 @@ export var network ={
         }
        
         try{
+
             return await axios.post(url,formData,config)
         }catch(error){
             if(retry <=0){
                 cfg.showError(error.toString())
             }else{
+               
                 var next_retry = retry-1
-                config.log(`剩余重试次数${next_retry}`)
+                console.log(`等待2秒重试,剩余重试次数${next_retry}`)
+                await this.sleep(2000)
                 return await this.axios_post(url,formData,config,next_retry)
             }
            
         }
         
+    },
+    async sleep(min_second){
+        return new Promise((resolve,reject)=>{
+            setTimeout(() => {
+                resolve()
+            }, min_second);
+        } ) 
     },
     async cache(getter,setter){
         var resp =await  Promise.resolve(getter())
