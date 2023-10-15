@@ -12,8 +12,9 @@ import ex from '../ex';
 import './page.scss'
 
 import {pop_vue_com_vant} from './vanPop.vue'
-
+import cdn from '../cdn'
 export default {
+    js_lib:cdn,
     async pop_vue_com(com,ctx){
         
         var option = {}
