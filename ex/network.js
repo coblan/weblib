@@ -423,6 +423,15 @@ export var network ={
             return false;
     },
      downloadFile(url, fileName) {
+        if(!fileName){
+            const url_obj = new URL(url,location.origin) 
+            var rt = /[^\/]+$/.exec(  url_obj.pathname )
+            if(rt){
+                fileName = rt[0]
+            }else{
+                fileName = url
+            }
+        }
         fetch(url, {
             method: "get",
             mode: "no-cors",
