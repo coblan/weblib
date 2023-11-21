@@ -33,11 +33,18 @@
                     @load="onLoad"
                     @touchmove.stop
                     @scrollTop="scroll_top=$event"
+                    :is-empty="isEmpty"
                 >
                     <slot>
                                 here is content
 
                         </slot>
+                  <template v-slot:empty>
+                      <slot name="empty"></slot>
+                  </template>
+                  <template v-if="$slots.nomore" v-slot:nomore>
+                      <slot name="nomore"></slot>
+                  </template>
                 </scrollLoadList>
 </van-pull-refresh>
     </div>
@@ -52,6 +59,9 @@ export default {
       // pageIndex:{
       //     default:1
       // },
+      isEmpty:{
+          default:false,
+      },
       pageSize: {
         default: 10
       },

@@ -5,7 +5,12 @@
         </div>
         <div class="footer" v-if="finished || value">
             <van-loading v-if="value" size="24px">加载中...</van-loading>
-            <div v-if="finished">{{finishedText}}</div>
+            <div v-if="finished">
+              <slot v-if="isEmpty" name="empty"></slot>
+              <div v-else>
+                <slot name="nomore">{{finishedText}}</slot>
+              </div>
+            </div>
         </div>
         
     </div>
@@ -17,6 +22,9 @@ export default{
         finished:{},
         finishedText:{
             default:"--没有更多--"
+        },
+        isEmpty:{
+          default:false,
         },
 
     },
