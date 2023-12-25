@@ -129,8 +129,8 @@ export default  {
     // html2canvas配置项
     const ops = {
       scale,
-      // width,
-      // height,
+      width,
+      height,
       useCORS: true,
       allowTaint: false,
       ...options
