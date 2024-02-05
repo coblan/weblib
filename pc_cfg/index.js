@@ -56,7 +56,7 @@ var cfg={
         })
     },
     showMsg:function(msg,options){
-        return MessageBox.alert(msg,'提示')
+        return MessageBox.alert(msg,'提示',options)
     },
     warning:function(msg){
         layer.alert(msg,{title:['提示','color:white;background-color:#f0ad4e'],icon: 5})
