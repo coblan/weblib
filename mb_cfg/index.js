@@ -32,9 +32,9 @@ export default {
          await p.promise
         return resp
     },
-    showMsg(msg,{title,confirmButtonText='确定',}={}){
+    showMsg(msg,{title,confirmButtonText='确定',showConfirmButton=true}={}){
         // return  MessageBox.alert(msg)
-        return Dialog({ message: msg, confirmButtonText,title});
+        return Dialog({ message: msg, confirmButtonText,title,showConfirmButton:showConfirmButton});
     },
     showError(msg){
         // return  MessageBox.alert(msg)
