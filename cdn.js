@@ -26,7 +26,7 @@ if(jsdelivr_over){
         layer:'https://lib.baomitu.com/layer/3.5.1/layer.min.js',
         axios:"https://lib.baomitu.com/axios/0.26.1/axios.min.js",
         jquery:'https://s1.pstatp.com/cdn/jquery/3.4.1/jquery.min.js',
-
+        crypto_js:'https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/crypto-js/4.1.1/crypto-js.min.js',
         // swiper_js :'https://lib.baomitu.com/Swiper/6.8.4/swiper-bundle.min.js',
         // swiper_css:'https://lib.baomitu.com/Swiper/6.8.4/swiper-bundle.min.js'
 
