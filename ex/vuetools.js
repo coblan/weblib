@@ -36,6 +36,10 @@ export var  vuetool = {
             Vue.delete(obj,name)
         })
     },
+    vueAssignClear:function(row){
+        var namelist =  Object.keys(row)
+        this.vueDelete(row,namelist)
+    },
     vueExpose(obj,instance){
       setTimeout(()=>{
         Object.keys(obj).forEach(x=>{
