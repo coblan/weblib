@@ -124,37 +124,49 @@ export default {
             return
           }
           this.page_index += 1
-          var rows = await this.getRows(this.page_index, this.pageSize, this.option)
-          // this.rows.push(...rows)
-          this.value.push(...rows)
-
-          // Vue.nextTick(()=>{
-          if (rows.length < this.pageSize) {
-            this.finish()
-          } else {
+          try{
+            var rows = await this.getRows(this.page_index, this.pageSize, this.option)
+            this.value.push(...rows)
+            if (rows.length < this.pageSize) {
+              this.finish()
+            } else {
+              this.loadOver()
+            }
+          }catch (e){
             this.loadOver()
           }
+
+          // var rows = await this.getRows(this.page_index, this.pageSize, this.option)
+          // // this.rows.push(...rows)
+          // this.value.push(...rows)
+          //
+          // // Vue.nextTick(()=>{
+          // if (rows.length < this.pageSize) {
+          //   this.finish()
+          // } else {
+          //   this.loadOver()
+          // }
           // })
 
         },
         async onRefresh() {
           this.page_index = 1
           this.finished = false
-          var rows = await this.getRows(this.page_index, this.pageSize, this.option)
-
-          // this.$emit('update:rows',rows)
-          this.$emit('input', rows)
-          // Vue.nextTick(()=>{
-          if (rows.length < this.pageSize) {
-            this.finish()
-          } else {
+          try{
+            var rows = await this.getRows(this.page_index, this.pageSize, this.option)
+            this.$emit('input', rows)
+            if (rows.length < this.pageSize) {
+              this.finish()
+            } else {
+              this.loadOver()
+            }
+            if (!this.finish) {
+              this.check()
+            }
+          }catch (e){
             this.loadOver()
           }
-          if (!this.finish) {
-            this.check()
-          }
 
-          // })
         },
 
 
