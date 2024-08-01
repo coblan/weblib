@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import fun from "../../work_h5/utils/fun";
 
 export var  vuetool = {
     vueNextTick(){
@@ -59,6 +60,29 @@ export var  vuetool = {
     },
     vueBroadcase:function(){
 
+    },
+    vueProxyCall:function (self,name) {
+        if(self._proxy){
+            return self._proxy[name]
+        }else{
+            return  self[name]
+        }
+    },
+    vueProxySuper:function (self) {
+        // if(!self.$refs.super){
+        //     return
+        // }
+        self._proxy =  new Proxy(self.$refs.super,{
+            get: function(obj, prop) {
+                if(prop in self){
+                    return  self[prop]
+                }else if(prop in obj){
+                    return  obj[prop]
+                }else if(obj._proxy){
+                    return  obj._proxy[prop]
+                }
+            }
+        })
     },
     vueParStore:function(self,filter){
         var parent = self.$parent
