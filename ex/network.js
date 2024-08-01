@@ -385,7 +385,8 @@ export var network ={
                    if(kws == undefined){
                        kws = {}
                    }
-                   return ex.director_call('d.director_element_call',{director_name:director_name,attr_name:attr_name,kws:kws})
+                   return ex.director_post(`element/${director_name}/${attr_name}`,kws)
+                //    return ex.director_call('d.director_element_call',{director_name:director_name,attr_name:attr_name,kws:kws})
                }
            }
         };

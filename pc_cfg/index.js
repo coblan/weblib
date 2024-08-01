@@ -56,6 +56,7 @@ var cfg={
         })
     },
     showMsg:function(msg,options){
+        
         return MessageBox.alert(msg,'提示',options)
     },
     warning:function(msg){
