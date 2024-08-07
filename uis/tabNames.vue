@@ -1,7 +1,7 @@
 <template>
     <div class="tab-names" :style="mysytle">
       <div  v-for="option in options" :key="option.name">
-        <component class="action" :class="{active:value==option.name}"
+        <component class="action editor" :class="{active:value==option.name}"
                    v-if="option.editor" :is="option.editor" v-bind="option.bind" @click.native="onClick(option)"></component>
         <div v-else class="action"  @click='onClick(option)'
              :class="{active:value==option.name}">{{option.label}}</div>
