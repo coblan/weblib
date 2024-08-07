@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import fun from "../../work_h5/utils/fun";
 
 export var  vuetool = {
     vueNextTick(){
