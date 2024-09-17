@@ -1,4 +1,5 @@
 import {network} from './network.js'
+import ex from './index.js'
 export default {
     // async call(func){
     //     var resp = await network.load_js('https://lib.baomitu.com/velocity/1.5.2/velocity.min.js')
@@ -10,7 +11,7 @@ export default {
     async velocityCall(func){
         if(!window.Velocity){
             var resp = await network.load_js('https://lib.baomitu.com/velocity/1.5.2/velocity.min.js')
-            if ($.Velocity){
+            if ( window.$ && $.Velocity){
                 window.Velocity = $.Velocity
             }
         }
