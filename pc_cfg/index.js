@@ -7,6 +7,7 @@ import ex from 'weblib/ex'
 
 import { Message } from 'element-ui';
 import { MessageBox } from 'element-ui';
+import { Loading } from 'element-ui';
 
 import  {append_vue_dom} from 'weblib/pc_cfg/appendVueDom'
 import Toast from '../pc/toast.vue'
@@ -16,7 +17,7 @@ import {pop_vue_com_ele} from './elePop.vue'
 // ex.load_js(cdn.jquery)
 // var p_layer = ex.load_js(cdn.layer)
 
-import { Loading } from 'element-ui';
+
 // import { VueLoaderPlugin } from 'vue-loader';
 
 
