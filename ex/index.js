@@ -60,6 +60,9 @@ var ex ={
     //         return false
     //     }
     // }
+     convertRemToPixels(rem) {
+        return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
+      }
 }
 
 Object.assign(ex,urlparse)
