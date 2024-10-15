@@ -564,6 +564,7 @@ export var network ={
             // }
         }).catch((error) => {
                 console.log(error)
+                pro.reject(error)
         })
 
         return pro.promise
