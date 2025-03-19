@@ -70,6 +70,9 @@ export default {
       direction: {
           default:"horizontal",//"vertical"
       },
+      config:{
+        
+      }
 
     },
     components:{
@@ -92,7 +95,7 @@ export default {
             ex.load_css(cdn.swiper_css)
             await ex.load_js(cdn.swiper_js)
             var self =this
-            var swiper = new Swiper(this.$el.querySelector('.swiper-container'), {
+            var config = {
                 slidesPerView: this.slidesPerView ,
                 // freeMode: true,
                 spaceBetween: 30,
@@ -119,7 +122,9 @@ export default {
                 //
                 //     },
                 // },
-            });
+            }
+            config = Object.assign(config,this.config)
+            var swiper = new Swiper(this.$el.querySelector('.swiper-container'),config );
         },
         on_click(item){
 
